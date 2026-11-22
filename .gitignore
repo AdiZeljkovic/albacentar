@@ -1,0 +1,16 @@
+node_modules/
+.next/
+out/
+.env
+.env.local
+.env.*.local
+*.tsbuildinfo
+next-env.d.ts
+.DS_Store
+Thumbs.db
+
+# lokalne postavke alata
+.claude/settings.local.json
+
+# izvorni klijentov dokument s tekstovima (tekst je već u src/content)
+*.docx

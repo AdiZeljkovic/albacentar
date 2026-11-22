@@ -1,0 +1,309 @@
+/* Stranica O meni i stranica 404: stilovi redizajna u jeziku naslovnice. Učitava se nakon stranice.css. */
+
+/* ==========================================================================
+   1. Svitanje: noć iz glave prelazi u zoru, sunce izlazi iza portreta
+   ========================================================================== */
+.am-svitanje {
+  --kraj: clamp(190px, 21vw, 320px);
+  position: relative; isolation: isolate; overflow: hidden; color: var(--noc-t);
+  padding: clamp(10px, 2vw, 30px) 0 calc(var(--kraj) * 0.52);
+  /* vrh je boja kojom završava glava (#080a16); nebo prema obzoru svijetli */
+  /* dva sloja koja se spajaju u istoj boji: zora je vezana uz dno (visina ovisi o krajoliku), noć ispunja ostatak */
+  background:
+    linear-gradient(180deg, #4a3a7c 0, #6a4682 27%, #a66488 54.6%, #e79482 74.6%, #f8d8a8 91.5%) bottom / 100% calc(var(--kraj) * 2.6) no-repeat,
+    linear-gradient(180deg, #1b1d4e 0, #2a2462 38%, #3a2d70 70%, #4a3a7c 100%) top / 100% calc(100% - var(--kraj) * 2.6 + 1px) no-repeat,
+    #4a3a7c;
+}
+/* glava iznad svitanja ne tamni do crne, nego se nebo od vrha stranice do obzora samo svjetli; prsten stane u njezinu visinu */
+.glava-noc:has(+ .am-svitanje) { background: radial-gradient(ellipse 50% 60% at 82% 30%, rgb(217 181 111 / 0.11), transparent 70%), radial-gradient(ellipse 70% 40% at 24% 36%, rgb(84 80 170 / 0.28), transparent 70%), linear-gradient(180deg, #0b0f22 0%, #141b38 52%, #1b1d4e 100%); }
+@media (min-width: 901px) { .glava-noc:has(+ .am-svitanje) .glava-prsten { width: clamp(300px, 33vw, 470px); translate: 0 -50%; } }
+.am-sv-zvijezde { position: absolute; z-index: -4; inset: 0 0 auto 0; height: 62%; -webkit-mask-image: linear-gradient(180deg, #000 20%, transparent); mask-image: linear-gradient(180deg, #000 20%, transparent); }
+.am-danica { position: absolute; z-index: -3; left: 71%; top: clamp(40px, 7%, 90px); width: 60px; height: 60px; overflow: visible; animation: am-treperi 5.5s ease-in-out infinite; }
+@keyframes am-treperi { 0%, 100% { opacity: 0.55; transform: scale(0.86); } 50% { opacity: 1; transform: scale(1.06); } }
+.am-sv-oblaci { z-index: -3; bottom: calc(var(--kraj) * 0.5); height: clamp(220px, 24vw, 340px); opacity: 0.75; }
+
+.am-krajolik { position: absolute; z-index: -1; left: 0; bottom: -2px; width: 100%; height: calc(var(--kraj) + 2px); display: block; }
+.am-put-postaja { animation: om-postaja 7s ease-in-out calc(var(--i, 0) * 1.2s) infinite; }
+.am-put-svjetlo .polje-kometa.sjaj { stroke-width: 12; }
+.am-put-svjetlo .polje-kometa.rep { stroke-width: 2; }
+.am-put-svjetlo .polje-kometa.glava { stroke-width: 5; }
+
+.am-sv-mreza { display: grid; grid-template-columns: 0.8fr 1.2fr; gap: clamp(40px, 7vw, 104px); }
+.am-sv-lijevo { position: relative; align-self: end; justify-self: center; width: min(100%, 392px); }
+
+/* portret u luku (Portret.tsx) */
+.am-portret { position: relative; aspect-ratio: 300 / 440; }
+.am-prostor { position: absolute; left: 10%; right: 10%; top: 6.82%; bottom: 4.55%; overflow: hidden; isolation: isolate; border-radius: 50% 50% 0 0 / 30.77% 30.77% 0 0; background: #2a1c3a; box-shadow: 0 34px 60px -30px rgb(24 12 34 / 0.75); }
+.am-foto { object-fit: cover; }
+/* dok nema fotografije: stablo života kao silueta pred izlazećim suncem */
+.am-zora { position: absolute; inset: 0; background: radial-gradient(ellipse 84% 62% at 50% 76%, #fffbe6, #ffd690 32%, #f29e6c 60%, #9a5c88 100%); }
+.am-prsten { position: absolute; left: 50%; top: 52%; width: 98%; height: auto; max-width: none; translate: -50% -50%; overflow: visible; }
+.am-drvo {
+  position: absolute; left: 13%; top: 24%; width: 74%; aspect-ratio: 520 / 500; opacity: 0.84;
+  background: linear-gradient(180deg, #3a1d3c, #1d0f22);
+  -webkit-mask: url("/img/drvo-zlatno.webp") center / contain no-repeat; mask: url("/img/drvo-zlatno.webp") center / contain no-repeat;
+}
+.am-sjena { position: absolute; inset: 0; box-shadow: inset 0 0 44px rgb(70 24 44 / 0.45); pointer-events: none; }
+.am-luk { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; }
+/* meki sjaj oko luka: prsten svjetla umjesto filtera nad crtežom */
+.am-portret::before { content: ""; position: absolute; z-index: -1; left: 4%; right: 4%; top: 1.5%; bottom: 3%; border-radius: 50% 50% 0 0 / 31.5% 31.5% 0 0; box-shadow: 0 0 26px 3px rgb(255 226 160 / 0.42); }
+
+/* sunce: sidro je pri dnu portreta, dijelovi su oko njega; grebeni (z-index -1) ga dolje zaklanjaju */
+.am-sunce { position: absolute; z-index: -2; left: 50%; bottom: 16%; width: 0; height: 0; pointer-events: none; transform: translateY(260px); opacity: 0; transition: transform 6s cubic-bezier(0.2, 0.6, 0.2, 1) 0.2s, opacity 2.8s ease 0.2s; }
+.am-sunce i { position: absolute; left: 0; top: 0; display: block; aspect-ratio: 1; border-radius: 50%; translate: -50% -50%; }
+.am-zrake { width: min(1700px, 260vw); -webkit-mask-image: radial-gradient(circle, #000 8%, transparent 62%); mask-image: radial-gradient(circle, #000 8%, transparent 62%); animation: vrti 170s linear infinite; }
+.am-zar { width: min(1000px, 190vw); background: radial-gradient(circle, rgb(255 238 194 / 0.84), rgb(255 192 122 / 0.46) 22%, rgb(240 132 112 / 0.18) 46%, transparent 66%); animation: mj-dise 7s ease-in-out infinite; }
+.am-kolut { width: min(470px, 108vw); background: radial-gradient(circle at 50% 46%, #fffdf0, #ffe9b0 46%, #ffc878 80%, #f6a868 100%); box-shadow: 0 0 90px 24px rgb(255 216 152 / 0.6); }
+/* izlazak: sunce se digne samo, jednom, kad portret uđe u ekran */
+.am-portret[data-inview] ~ .am-sunce { transform: none; opacity: 1; }
+.am-ptice { position: absolute; inset: -34% -70% 24% -70%; pointer-events: none; }
+.am-ptica { position: absolute; left: 0; top: var(--y, 20%); width: calc(26px * var(--v, 1)); height: auto; max-width: none; overflow: visible; opacity: 0.8; animation: am-let var(--t, 36s) linear var(--d, 0s) infinite; }
+@keyframes am-let { from { transform: translate(-40px, 20px); } 50% { transform: translate(480px, -14px); } to { transform: translate(1000px, 12px); } }
+
+/* tekst uz portret */
+.am-sv-tekst { position: relative; isolation: isolate; align-self: start; padding: clamp(10px, 2vw, 34px) 0 clamp(120px, 13vw, 200px); }
+.am-sv-tekst::before { content: ""; position: absolute; z-index: -1; inset: -8% -14% 4% -16%; background: radial-gradient(ellipse 50% 50% at 50% 50%, rgb(22 18 56 / 0.5), transparent 70%); pointer-events: none; }
+.am-sv-tekst .proza > * + * { margin-top: 1.15em; }
+.am-sv-tekst .proza p { max-width: 62ch; }
+.am-sv-tekst .uvod { font-family: var(--serif); font-size: clamp(23px, 2.15vw, 31px); line-height: 1.38; letter-spacing: -0.005em; color: var(--bijela-t); max-width: 30em !important; }
+.am-sv-tekst .mut { color: #dccdb8; }
+.am-sv-crta { display: flex; align-items: center; gap: 14px; margin-bottom: clamp(20px, 2.4vw, 32px); color: var(--zlato-j); }
+.am-sv-crta svg { width: 20px; height: 26px; overflow: visible; flex-shrink: 0; }
+.am-sv-crta i { display: block; width: clamp(60px, 9vw, 130px); height: 1px; background: linear-gradient(90deg, rgb(226 196 135 / 0.7), transparent); }
+.am-potpis { margin-top: clamp(22px, 2.6vw, 34px); font-size: clamp(40px, 4vw, 58px); color: #ffe6ae; text-shadow: 0 2px 24px rgb(40 20 60 / 0.6); }
+/* potpis se ispiše kao rukom kad uđe u ekran */
+.am-potpis span { display: inline-block; padding: 0.1em 0.2em 0.16em 0.04em; clip-path: inset(-10% 100% -10% -2%); }
+.am-potpis[data-inview] span { animation: pisi 2.2s var(--ease-io) 0.5s forwards; }
+@media (prefers-reduced-motion: reduce) { .am-ptice { display: none; } .am-potpis span { clip-path: none; } .am-sunce { transform: none; opacity: 1; } }
+
+@media (max-width: 900px) {
+  .am-svitanje { padding-top: 0; }
+  .am-sv-mreza { grid-template-columns: 1fr; gap: 40px; }
+  .am-sv-lijevo { order: 2; width: min(78%, 300px); }
+  .am-sv-tekst { padding-bottom: 0; }
+  .am-danica { display: none; }
+}
+
+/* ==========================================================================
+   2. Put koji me oblikovao: cesta iz magle svitanja, postaje su niše uz put
+   ========================================================================== */
+.am-put { --pt: clamp(80px, 9vw, 130px); overflow: hidden; padding: var(--pt) 0 clamp(50px, 6vw, 90px); background: var(--krem); }
+.am-put-nebo { position: absolute; inset: 0 0 auto 0; height: 1100px; z-index: -1; overflow: hidden; pointer-events: none; -webkit-mask-image: linear-gradient(180deg, transparent, #000 240px, #000 62%, transparent); mask-image: linear-gradient(180deg, transparent, #000 240px, #000 62%, transparent); }
+.am-put-sunce { position: absolute; left: 7%; top: 330px; width: 0; height: 0; }
+.am-put-sunce::after, .am-put-sunce i { content: ""; position: absolute; left: 0; top: 0; display: block; aspect-ratio: 1; border-radius: 50%; translate: -50% -50%; }
+.am-put-zrake { width: min(1500px, 220vw); -webkit-mask-image: radial-gradient(circle, #000 6%, transparent 60%); mask-image: radial-gradient(circle, #000 6%, transparent 60%); animation: vrti 220s linear infinite; }
+.am-put-sunce::after { width: min(900px, 150vw); background: radial-gradient(circle, rgb(255 238 194 / 0.95), rgb(255 216 152 / 0.5) 18%, rgb(255 206 140 / 0.16) 44%, transparent 64%); animation: mj-dise 8s ease-in-out infinite; }
+.am-put-kolut { z-index: 1; width: clamp(76px, 8vw, 120px); background: radial-gradient(circle, #fffef6, #fff0c4 60%, #ffdf9a); box-shadow: 0 0 60px 20px rgb(255 226 160 / 0.7); }
+.am-put-oblaci.a { top: 3%; height: 340px; opacity: 0.9; }
+.am-put-oblaci.b { top: 46%; height: 420px; opacity: 0.6; animation-duration: 310s; animation-direction: alternate-reverse; }
+
+/* spoj s putem iz svitanja: gore je na 68,75 % širine ekrana (tamo put ulazi u maglu), dolje nad prvom postajom */
+.am-put-vrh { position: relative; }
+.am-put-spoj { position: absolute; z-index: -1; top: calc(-1 * var(--pt)); left: calc(50% + 210px); width: max(1px, calc(18.75vw - 210px)); height: calc(100% + var(--pt)); max-width: none; overflow: visible; pointer-events: none; }
+.am-put-glava { max-width: 560px; padding-bottom: clamp(34px, 4vw, 60px); }
+.am-put-glava h2 { margin-top: 14px; }
+
+.am-put-tok { position: relative; }
+.am-cesta { position: absolute; left: 50%; top: 0; width: 1000px; height: calc(var(--red) * 5); max-width: none; translate: -50% 0; overflow: visible; pointer-events: none; }
+/* prijeđeni put iscrta se sam kad cesta uđe u ekran */
+.am-cesta-zlato { stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset 7s cubic-bezier(0.4, 0, 0.3, 1) 0.4s; }
+.am-put-tok[data-inview] .am-cesta-zlato { stroke-dashoffset: 0; }
+.am-cesta-svjetlo .polje-kometa { animation-timing-function: linear; }
+.am-cesta-svjetlo .polje-kometa.sjaj { stroke: #f0b24e; stroke-width: 20; }
+.am-cesta-svjetlo .polje-kometa.rep { stroke: #d6952e; stroke-width: 3.6; }
+.am-cesta-svjetlo .polje-kometa.glava { stroke: #fffdf2; stroke-width: 5.5; stroke-dasharray: 0.002 3; stroke-linecap: round; }
+.am-cesta-svjetlo .polje-kometa.glava.am-hod-rub { stroke: #e9a030; stroke-width: 11; }
+.am-znakovi { opacity: 0.62; }
+/* ruža vjetrova: samo gdje uz cestu ima praznog mjesta */
+.am-ruza { display: none; position: absolute; left: calc(50% - 506px); top: calc(var(--red) * 2.5); width: 220px; height: 220px; max-width: none; translate: -50% -50%; overflow: visible; opacity: 0.6; pointer-events: none; }
+.am-ruza-igla { animation: am-igla 11s ease-in-out infinite; }
+@keyframes am-igla { 0%, 100% { transform: rotate(-4deg); } 50% { transform: rotate(5deg); } }
+@media (min-width: 1330px) { .am-ruza { display: block; } }
+.am-staza { display: none; }
+
+.am-postaje { position: relative; z-index: 1; }
+.am-postaja { position: relative; height: var(--red); display: flex; align-items: center; }
+.am-nisa { position: absolute; top: 50%; width: 190px; aspect-ratio: 162 / 218; translate: -50% -50%; }
+.am-postaja.desno .am-nisa { left: calc(50% + 210px); }
+.am-postaja.lijevo .am-nisa { left: calc(50% - 210px); }
+.am-nisa svg { display: block; width: 100%; height: 100%; overflow: visible; }
+.am-nisa::after { content: ""; position: absolute; z-index: -1; left: -8%; right: -8%; bottom: -3%; height: 11%; border-radius: 50%; background: radial-gradient(closest-side, rgb(98 62 24 / 0.36), transparent); }
+/* niša zasvijetli kad svjetlo s ceste stigne do nje */
+.am-nisa-sjaj { position: absolute; z-index: -2; inset: -30% -48%; border-radius: 50%; background: radial-gradient(closest-side, rgb(255 198 106 / 0.8), rgb(255 214 140 / 0.3) 46%, transparent 74%); opacity: 0.22; animation: am-lampa var(--hod, 15s) linear var(--t, 0s) infinite; }
+@keyframes am-lampa { 0% { opacity: 0.22; transform: scale(0.8); } 3% { opacity: 1; transform: scale(1.08); } 30% { opacity: 0.5; transform: scale(1); } 62%, 100% { opacity: 0.22; transform: scale(0.8); } }
+.am-nisa-dragulj { opacity: 0; animation: am-dragulj var(--hod, 15s) linear var(--t, 0s) infinite; }
+@keyframes am-dragulj { 0% { opacity: 0; } 3% { opacity: 1; } 34% { opacity: 0.4; } 62%, 100% { opacity: 0; } }
+.am-tr { transform-box: fill-box; transform-origin: center; animation: am-treperi 4.8s ease-in-out var(--d, 0s) infinite; }
+/* cilj puta: stablo pod zviježđem, iza niše zrake */
+.am-nisa-drvo { position: absolute; left: 17%; top: 43.6%; width: 66%; height: auto; }
+.am-nisa-zrake { position: absolute; z-index: -3; left: 50%; top: 50%; width: 520px; aspect-ratio: 1; border-radius: 50%; translate: -50% -50%; -webkit-mask-image: radial-gradient(circle, #000 18%, transparent 66%); mask-image: radial-gradient(circle, #000 18%, transparent 66%); animation: vrti 150s linear infinite; }
+
+.am-postaja-tekst { width: min(400px, 100%); }
+.am-postaja.desno .am-postaja-tekst { margin-left: auto; margin-right: calc(50% - 66px); text-align: right; }
+.am-postaja.lijevo .am-postaja-tekst { margin-left: calc(50% - 66px); }
+.am-postaja-br { display: inline-flex; align-items: center; gap: 12px; font-size: 12px; font-weight: 600; letter-spacing: 0.2em; color: var(--zlato-t); white-space: nowrap; }
+.am-postaja-br i { font-style: normal; color: #b39c7e; margin-left: -6px; }
+.am-postaja-br::before, .am-postaja-br::after { content: ""; width: 38px; height: 1px; background: linear-gradient(90deg, var(--zlato), rgb(184 138 62 / 0.2)); }
+.am-postaja.desno .am-postaja-br::before { display: none; }
+.am-postaja.desno .am-postaja-br::after { background: linear-gradient(270deg, var(--zlato), rgb(184 138 62 / 0.2)); }
+.am-postaja.lijevo .am-postaja-br::after { display: none; }
+.am-postaja h3 { margin-top: 10px; font-size: clamp(36px, 3.5vw, 52px); line-height: 1; }
+.am-postaja-tekst p { margin-top: 14px; font-size: 16.5px; line-height: 1.65; max-width: 34ch; }
+.am-postaja.desno .am-postaja-tekst p { margin-left: auto; }
+.am-postaja.cilj h3 { color: var(--zlato-t); font-style: italic; }
+
+@media (max-width: 980px) {
+  /* na uskom ekranu put iz magle skrene ulijevo iznad naslova, pa uz lijevi rub silazi do postaja; naslov stoji desno od njega */
+  .am-put { --pt: 150px; padding-bottom: 20px; }
+  .am-put-sunce { display: none; }
+  .am-put-spoj { left: 48px; width: calc(50% + 18.75vw - 48px); height: var(--pt); }
+  .am-put-spoj path:nth-child(1) { stroke-width: 19px; }
+  .am-put-spoj path:nth-child(2) { stroke-width: 16.4px; }
+  .am-put-spoj path:nth-child(3) { stroke-width: 2px; }
+  .am-put-glava { padding-left: 118px; padding-top: 6px; }
+  .am-cesta { display: none; }
+  /* cesta kao vijugava staza uz lijevi rub, iza niša */
+  .am-put-vrh::before, .am-staza {
+    content: ""; display: block; position: absolute; z-index: -1; left: 0; top: 0; bottom: 0; width: 96px;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='240' viewBox='0 0 96 240' fill='none'%3E%3Cpath id='p' d='M48 0 C48 30 57 30 57 60 C57 90 48 90 48 120 C48 150 39 150 39 180 C39 210 48 210 48 240' stroke='%23c9a35c' stroke-opacity='.7' stroke-width='19'/%3E%3Cpath d='M48 0 C48 30 57 30 57 60 C57 90 48 90 48 120 C48 150 39 150 39 180 C39 210 48 210 48 240' stroke='%23fdf6e8' stroke-width='16.4'/%3E%3Cpath d='M48 0 C48 30 57 30 57 60 C57 90 48 90 48 120 C48 150 39 150 39 180 C39 210 48 210 48 240' stroke='%23c9973f' stroke-width='2'/%3E%3C/svg%3E") repeat-y center top / 96px 240px;
+  }
+  .am-staza { z-index: 0; bottom: 96px; }
+  /* uz naslov je put ravan, pa se bez loma nastavlja na krivulju iznad i na vijuge ispod */
+  .am-put-vrh::before { background: linear-gradient(90deg, transparent 38.5px, rgb(201 163 92 / 0.7) 38.5px 39.8px, #fdf6e8 39.8px 47px, #c9973f 47px 49px, #fdf6e8 49px 56.2px, rgb(201 163 92 / 0.7) 56.2px 57.5px, transparent 57.5px); }
+  .am-postaja { display: grid; grid-template-columns: 96px minmax(0, 1fr); gap: 22px; height: auto; min-height: 190px; padding: 18px 0; }
+  .am-nisa, .am-postaja.desno .am-nisa, .am-postaja.lijevo .am-nisa { position: relative; left: auto; top: auto; width: 96px; translate: none; }
+  .am-nisa-sjaj { animation-delay: var(--tm, 0s); }
+  .am-nisa-dragulj { animation-delay: var(--tm, 0s); }
+  .am-nisa-zrake { width: 300px; }
+  .am-postaja.desno .am-postaja-tekst, .am-postaja.lijevo .am-postaja-tekst { width: auto; margin: 0; text-align: left; }
+  .am-postaja.desno .am-postaja-br::after { display: none; }
+  .am-postaja.desno .am-postaja-br::before { display: block; }
+  .am-postaja h3 { font-size: clamp(30px, 8vw, 40px); }
+  .am-postaja-tekst p, .am-postaja.desno .am-postaja-tekst p { margin-left: 0; font-size: 15.5px; }
+}
+
+/* ==========================================================================
+   3. Moj put prema konstelacijama: proza, uvjerenje na kartici, list s interesima
+   ========================================================================== */
+.am-iskrica { display: inline-block; width: 16px; height: 21px; flex-shrink: 0; overflow: visible; color: #a67c32; }
+/* list papira: zlatne vlasi uz rub, sitne zakovice u kutovima unutarnjeg okvira, zrno */
+.am-papir {
+  position: relative; padding: clamp(32px, 3.6vw, 48px) clamp(26px, 3.2vw, 46px); border-radius: 5px;
+  border: 1px solid rgb(184 138 62 / 0.45);
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .45 0 0 0 0 .33 0 0 0 0 .18 0 0 0 .09 0'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)'/%3E%3C/svg%3E"),
+    linear-gradient(168deg, #fffdf8, #fcf4e4 62%, #f8ebd4);
+  box-shadow: inset 0 1px 0 #fff, 0 44px 70px -48px rgb(130 86 30 / 0.62), 0 3px 6px -3px rgb(130 86 30 / 0.2);
+}
+.am-papir::before {
+  content: ""; position: absolute; inset: 8px; border: 1px solid rgb(184 138 62 / 0.3); border-radius: 2px; pointer-events: none;
+  background:
+    radial-gradient(circle, #b88a3e 1.5px, transparent 2.1px) -3.5px -3.5px / 7px 7px no-repeat,
+    radial-gradient(circle, #b88a3e 1.5px, transparent 2.1px) calc(100% + 3.5px) -3.5px / 7px 7px no-repeat,
+    radial-gradient(circle, #b88a3e 1.5px, transparent 2.1px) -3.5px calc(100% + 3.5px) / 7px 7px no-repeat,
+    radial-gradient(circle, #b88a3e 1.5px, transparent 2.1px) calc(100% + 3.5px) calc(100% + 3.5px) / 7px 7px no-repeat;
+  background-origin: border-box; background-clip: border-box;
+}
+/* zvijezda koja prekida gornju vlas okvira */
+.am-papir-znak { position: absolute; left: clamp(30px, 3.6vw, 52px); top: -15px; width: 24px; height: 31px; color: #a67c32; }
+
+.am-pristup { padding-top: clamp(64px, 7.5vw, 116px); }
+.am-pr-mreza { display: grid; grid-template-columns: 0.86fr 1.14fr; column-gap: clamp(40px, 7vw, 110px); row-gap: clamp(34px, 3.6vw, 54px); align-items: start; }
+.am-pr-glava { grid-column: 1; grid-row: 1; }
+.am-pr-glava h2 { margin-top: 14px; }
+.am-pr-proza { grid-column: 2; grid-row: 1 / span 2; padding-top: clamp(0px, 2.6vw, 38px); }
+.am-pr-proza > * + * { margin-top: 1.2em; }
+.am-pr-proza .uvod { font-family: var(--serif); font-size: clamp(23px, 2.1vw, 30px); line-height: 1.38; letter-spacing: -0.005em; color: var(--smeda); max-width: 28em; }
+.am-pr-proza .mut { font-size: 17.5px; line-height: 1.75; max-width: 62ch; }
+.am-vjerujem { grid-column: 1; grid-row: 2; }
+.am-vjerujem .am-papir { rotate: -0.8deg; }
+.am-vjerujem .istaknuto { margin: 0 !important; padding: 0; border: 0; font-size: clamp(22px, 2vw, 27px); line-height: 1.42; }
+
+.am-list { margin-top: clamp(56px, 6.5vw, 100px); }
+.am-list .am-papir { display: grid; grid-template-columns: 1.12fr 0.88fr; gap: clamp(30px, 5vw, 84px); align-items: center; padding: clamp(40px, 4.6vw, 68px) clamp(26px, 4.8vw, 74px); }
+.am-list .am-papir-znak { left: 50%; margin-left: -12px; }
+.am-list .zanimanja-naslov { display: flex; align-items: center; gap: 16px; margin: 0 !important; font-size: 12px; letter-spacing: 0.26em; text-transform: uppercase; font-weight: 600; color: var(--zlato-t); }
+.am-list .zanimanja-naslov::after { content: ""; flex: 1; height: 1px; background: linear-gradient(90deg, rgb(184 138 62 / 0.6), transparent); }
+.am-zanimanja { margin-top: 18px; display: grid; grid-template-columns: 1fr 1fr; column-gap: clamp(22px, 3vw, 44px); }
+.am-zanimanja li { display: flex; align-items: flex-start; gap: 13px; padding: 13px 0; border-bottom: 1px solid rgb(184 138 62 / 0.22); font-family: var(--serif); font-size: clamp(19px, 1.65vw, 23px); line-height: 1.22; color: var(--smeda); }
+.am-zanimanja .am-iskrica { margin-top: 0.22em; transition: transform 0.6s var(--ease-out), color 0.3s; }
+.am-zanimanja li:hover .am-iskrica { transform: scale(1.5) rotate(45deg); color: var(--zlato-t); }
+.am-list-tekst { font-size: 17.5px; line-height: 1.78; padding-left: clamp(22px, 3vw, 44px); border-left: 1px solid rgb(184 138 62 / 0.32); }
+
+@media (max-width: 900px) {
+  .am-pr-mreza, .am-list .am-papir { grid-template-columns: minmax(0, 1fr); }
+  .am-pr-glava, .am-pr-proza, .am-vjerujem { grid-column: 1; grid-row: auto; }
+  .am-pr-proza { padding-top: 0; }
+  .am-vjerujem { margin-top: 10px; }
+  .am-pr-proza .mut, .am-list-tekst { font-size: 16.5px; }
+  .am-list-tekst { padding: 26px 0 0; border-left: 0; border-top: 1px solid rgb(184 138 62 / 0.32); }
+}
+@media (max-width: 560px) {
+  .am-zanimanja { grid-template-columns: minmax(0, 1fr); }
+  .am-zanimanja li:last-child { border-bottom: 0; }
+}
+
+/* ==========================================================================
+   4. Zašto AlBa Centar: noćna ploča s prizorom na dnu (Korijeni.tsx)
+   ========================================================================== */
+.am-zasto { --kv: clamp(250px, 27vw, 400px); --sw: clamp(170px, 20vw, 300px); padding: clamp(90px, 10vw, 140px) 0 calc(var(--kv) * 0.92); background: radial-gradient(ellipse 60% 50% at 15% 0%, var(--noc-plava) 0%, transparent 60%), linear-gradient(180deg, #161d38 0%, var(--noc) 46%, #1d2552 100%); }
+.am-zasto > .w { position: relative; z-index: 1; }
+.am-zasto .citat-tekst { margin-bottom: 44px; }
+.am-kor { position: absolute; left: 0; right: 0; bottom: 0; height: var(--kv); pointer-events: none; }
+.am-kor-krajolik { position: absolute; left: 0; bottom: -1px; width: 100%; height: calc(100% + 1px); display: block; }
+.am-kor-svjetlo .polje-kometa.sjaj { stroke-width: 9; }
+.am-kor-svjetlo .polje-kometa.rep { stroke-width: 1.6; }
+.am-kor-svjetlo .polje-kometa.glava { stroke-width: 4; }
+.am-kor-zvijezda { position: absolute; left: 76.67%; top: calc(42.9% - clamp(64px, 7.4vw, 112px)); width: clamp(84px, 9vw, 132px); height: auto; max-width: none; translate: -50% -50%; overflow: visible; }
+.am-kor-stablo { position: absolute; left: 21.4%; bottom: calc(var(--kv) * 0.375 - var(--sw) * 0.15); width: var(--sw); translate: -50% 0; }
+.am-kor-drvo { position: relative; display: block; width: 100%; height: auto; }
+.am-kor-zar { position: absolute; inset: -26% -38% -4%; border-radius: 50%; background: radial-gradient(closest-side, rgb(240 200 120 / 0.3), rgb(240 200 120 / 0.09) 52%, transparent 74%); animation: mj-dise 8s ease-in-out infinite; }
+.am-kor-korijenje { position: absolute; left: 50%; top: 93%; width: 100%; height: auto; max-width: none; translate: -50% 0; overflow: visible; }
+.am-kor-zile .polje-kometa.sjaj { stroke-width: 5; }
+.am-kor-zile .polje-kometa.rep { stroke-width: 1; }
+.am-kor-zile .polje-kometa.glava { stroke-width: 2.2; }
+.am-kor-krijesnica {
+  position: absolute; left: var(--x); top: var(--y); width: var(--v); height: var(--v); border-radius: 50%;
+  background: #fff1b8; box-shadow: 0 0 8px 2px rgb(255 220 130 / 0.85), 0 0 22px 7px rgb(255 190 90 / 0.32);
+  animation: am-krijesnica var(--t) ease-in-out var(--d) infinite alternate, krijesnica-sjaj var(--s) ease-in-out var(--d) infinite;
+}
+@keyframes am-krijesnica { from { transform: translate(0, 0); } 33% { transform: translate(16px, -20px); } 66% { transform: translate(-12px, -34px); } to { transform: translate(10px, -12px); } }
+@media (max-width: 700px) {
+  .am-zasto { --sw: 150px; }
+  .am-kor-stablo { left: 24%; }
+}
+
+/* ==========================================================================
+   Stranica 404: zvjezdana karta s praznim mjestom i zvijezdom koja je odlutala
+   ========================================================================== */
+.am-404 {
+  --kraj: clamp(120px, 13vw, 200px);
+  position: relative; isolation: isolate; overflow: hidden; color: var(--krem-t);
+  padding: calc(var(--traka) + clamp(44px, 6vw, 84px)) 0 calc(var(--kraj) + clamp(10px, 2vw, 34px));
+  background:
+    radial-gradient(ellipse 50% 60% at 82% 30%, rgb(217 181 111 / 0.09), transparent 70%),
+    radial-gradient(ellipse 70% 40% at 24% 36%, rgb(84 80 170 / 0.28), transparent 70%),
+    linear-gradient(180deg, #0b0f22 0%, #141b38 46%, #232d62 100%);
+}
+.am-404 :focus-visible { outline-color: var(--zlato-j); }
+.am-404-zvijezde { position: absolute; inset: 0 0 calc(var(--kraj) * 0.5) 0; z-index: -2; -webkit-mask-image: linear-gradient(180deg, #000 70%, transparent); mask-image: linear-gradient(180deg, #000 70%, transparent); }
+/* grebeni na dnu; najbliži je boje podnožja (--noc-2), pa se noć nastavlja bez reza */
+.am-404-kraj { position: absolute; z-index: -1; left: 0; bottom: -2px; width: 100%; height: calc(var(--kraj) + 2px); display: block; pointer-events: none; }
+.am-404-mreza { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 560px); gap: clamp(24px, 4vw, 70px); align-items: center; }
+.am-404-tekst { display: grid; grid-template-columns: minmax(0, 1fr); gap: 22px; }
+.am-404 .oz { color: var(--zlato-s); }
+.am-404 h1 { color: var(--bijela-t); font-size: clamp(44px, 5.4vw, 84px); }
+.am-404 h1 .em { color: var(--zlato-s); }
+.am-karta { display: block; width: 100%; height: auto; overflow: visible; }
+.am-karta-obruc { transform-origin: 300px 300px; animation: vrti 260s linear infinite; }
+.am-karta-val { transform-box: fill-box; transform-origin: center; animation: am-val 3.4s ease-out infinite; }
+@keyframes am-val { from { transform: scale(1); opacity: 0.8; } to { transform: scale(2.3); opacity: 0; } }
+.am-karta-svjetlo .polje-kometa.sjaj { stroke-width: 8; }
+.am-karta-svjetlo .polje-kometa.rep { stroke-width: 1.4; }
+.am-karta-svjetlo .polje-kometa.glava { stroke-width: 3.4; }
+.am-zalutala { animation: am-luta 9s ease-in-out infinite; }
+@keyframes am-luta { 0%, 100% { transform: translate(0, 0); } 30% { transform: translate(5px, -7px); } 65% { transform: translate(-4px, 4px); } }
+@media (max-width: 900px) {
+  .am-404-mreza { grid-template-columns: minmax(0, 1fr); gap: 20px; }
+  .am-karta { max-width: 430px; margin: 0 auto; }
+}

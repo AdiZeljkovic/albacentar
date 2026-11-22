@@ -1,0 +1,286 @@
+/* Blog: popis i članak: stilovi redizajna u jeziku naslovnice. Učitava se nakon stranice.css. */
+
+:root {
+  /* zrno papira: vlakna od šuma, crtaju se jednom kao slika pa ne opterećuju animacije */
+  --bl-zrno: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8 .2' numOctaves='2' seed='4' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .36 0 0 0 0 .2 0 0 0 0 .06 0 0 0 .8 -.37'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23n)'/%3E%3C/svg%3E");
+  /* četverokraki sjaj za ukrasne crte u tekstu */
+  --bl-sjaj: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='15' height='15'%3E%3Cpath d='M7.5 0 L8.5 6.5 L15 7.5 L8.5 8.5 L7.5 15 L6.5 8.5 L0 7.5 L6.5 6.5Z' fill='%23b88a3e'/%3E%3C/svg%3E");
+}
+
+/* ==========================================================================
+   Lampion (blog/Lampion.tsx) i cedulja koja o njemu visi
+   ========================================================================== */
+.bl-lebdi { --lw: clamp(150px, 13.6vw, 196px); display: block; transition: transform 0.9s var(--ease-out); }
+a:hover > .bl-lebdi { transform: translateY(-12px); }
+/* cijeli sklop (lampion, nit, cedulja) polako lebdi gore-dolje */
+.bl-leti { display: flex; flex-direction: column; align-items: center; animation: bl-leti var(--t, 7s) ease-in-out var(--d, 0s) infinite alternate; }
+@keyframes bl-leti { from { transform: translateY(-8px); } to { transform: translateY(9px); } }
+
+.bl-lampion { position: relative; z-index: 1; display: block; flex: none; width: var(--lw); aspect-ratio: 200 / 270; transform-origin: 50% 89%; animation: bl-naginje var(--t, 7s) ease-in-out var(--d, 0s) infinite alternate; }
+@keyframes bl-naginje { from { transform: rotate(-1.6deg); } to { transform: rotate(1.8deg); } }
+.bl-l-sjaj { position: absolute; inset: -34% -46% -30%; z-index: -1; border-radius: 50%; pointer-events: none; background: radial-gradient(ellipse 50% 50% at 50% 58%, rgb(255 206 120 / 0.5), rgb(255 150 80 / 0.16) 44%, transparent 70%); animation: bl-zar 2.3s ease-in-out infinite alternate; }
+/* jači sjaj pri prelasku mišem: pojavi se preko običnog, bez filtera */
+.bl-l-sjaj.jaci { opacity: 0; animation: none; background: radial-gradient(ellipse 50% 50% at 50% 58%, rgb(255 228 160 / 0.46), rgb(255 170 90 / 0.15) 46%, transparent 70%); transition: opacity 0.6s ease; }
+a:hover .bl-l-sjaj.jaci { opacity: 1; }
+@keyframes bl-zar { from { opacity: 0.72; transform: scale(0.96); } to { opacity: 1; transform: scale(1.05); } }
+.bl-l-tijelo { position: absolute; left: 0; top: 0; display: block; width: 100%; height: 88.89%; aspect-ratio: auto; border-radius: 0; overflow: hidden; -webkit-clip-path: url(#bl-oblik); clip-path: url(#bl-oblik); background: linear-gradient(180deg, #b8641f, #ffd98a); }
+.bl-l-tijelo img { object-fit: cover; object-position: center; transition: transform 1.4s var(--ease-out); }
+a:hover .bl-l-tijelo img { transform: scale(1.07); }
+/* tekst bez slike: goli papir sa znakom centra koji se nazire kroz njega */
+.bl-l-tijelo .bl-l-znak { position: absolute; left: 21%; top: 26%; width: 58%; height: auto; opacity: 0.5; }
+/* papir: topli preljev, zrno vlakana i svjetlo plamena koje diše odozdo */
+.bl-l-papir { position: absolute; inset: 0; background: var(--bl-zrno), rgb(255 226 170 / 0.16); background-size: 190px 190px, auto; }
+.bl-l-dah { animation: bl-dise 3.1s ease-in-out infinite alternate; }
+@keyframes bl-dise { from { opacity: 0.25; } to { opacity: 1; } }
+.bl-l-okvir { position: absolute; inset: 0; width: 100%; height: 100%; max-width: none; overflow: visible; pointer-events: none; }
+.bl-l-zar { transform-origin: 100px 240px; animation: bl-zar 1.7s ease-in-out infinite alternate; }
+.bl-l-plamen { transform-origin: 100px 246px; animation: bl-plamen 0.9s ease-in-out infinite alternate; }
+@keyframes bl-plamen { from { transform: scaleY(0.94) scaleX(1.04); } to { transform: scaleY(1.14) scaleX(0.95); } }
+
+/* visak: nit vezana za gorionik i cedulja na njoj, njišu se zajedno */
+.bl-visak { position: relative; display: flex; flex-direction: column; align-items: center; width: 100%; max-width: 272px; margin-top: calc(var(--lw) * -0.118); transform-origin: 50% 0; animation: bl-njih var(--t, 5s) ease-in-out var(--d, 0s) infinite alternate; }
+@keyframes bl-njih { from { transform: rotate(-1.9deg); } to { transform: rotate(1.9deg); } }
+.bl-nit { display: block; flex: none; width: 1px; height: calc(30px + var(--lw) * 0.1); background: linear-gradient(180deg, rgb(246 219 160 / 0.95), rgb(246 219 160 / 0.45)); }
+.bl-cedulja { position: relative; isolation: isolate; display: block; width: 100%; margin-top: -9px; padding: 30px 18px 19px; text-align: center; color: var(--smeda); }
+/* papir cedulje s odrezanim uglovima i rupicom za nit */
+.bl-cedulja::before {
+  content: ""; position: absolute; inset: 0; z-index: -1;
+  background:
+    radial-gradient(circle at 50% 13px, #272c68 0 3.3px, #c9a156 3.5px 5px, transparent 5.6px),
+    var(--bl-zrno),
+    linear-gradient(180deg, #fff3d6 0, #fdf5e2 24%, #f0e0c2 100%);
+  clip-path: polygon(16px 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 0 100%, 0 16px);
+}
+/* sjena cedulje na nebu */
+.bl-cedulja::after { content: ""; position: absolute; inset: 30% 4% -22px; z-index: -2; background: radial-gradient(ellipse 50% 50% at 50% 52%, rgb(5 7 26 / 0.6), rgb(5 7 26 / 0.28) 52%, transparent 74%); pointer-events: none; }
+.bl-cedulja .kat { font-size: 10.5px; font-weight: 600; letter-spacing: 0.2em; line-height: 1.5; text-transform: uppercase; color: var(--zlato-t); }
+.bl-cedulja h2, .bl-cedulja h3 { margin-top: 8px; font-size: clamp(19px, 1.55vw, 22px); line-height: 1.16; color: var(--smeda); text-wrap: balance; transition: color 0.3s; }
+a:hover .bl-cedulja h2, a:hover .bl-cedulja h3 { color: var(--zlato-t); }
+.bl-cedulja .objava-min, .bl-cedulja .blog-dat { margin-top: 9px; font-size: 12.5px; line-height: 1.45; color: var(--smeda-m); }
+.bl-nb { white-space: nowrap; }
+.bl-navod { display: block; margin-top: 8px; font-family: var(--serif); font-style: italic; font-size: 16px; line-height: 1.3; quotes: "„" "”"; color: var(--smeda-m); }
+
+/* lampioni u daljini: mali, dižu se s polja i gube u visini */
+.bl-daleki { position: absolute; inset: 0; z-index: -1; pointer-events: none; }
+.bl-daleki i { position: absolute; left: var(--x); bottom: var(--dno, -40px); width: calc(19px * var(--v)); aspect-ratio: 40 / 56; opacity: 0; animation: bl-uzlet var(--t) linear var(--d) infinite; }
+.bl-daleki i::before, .bl-tlo::before { content: ""; position: absolute; inset: -80% -130% -70%; border-radius: 50%; background: radial-gradient(ellipse 50% 50% at 50% 58%, rgb(255 196 110 / 0.5), rgb(255 150 80 / 0.14) 46%, transparent 70%); }
+.bl-daleki svg, .bl-tlo svg { position: relative; width: 100%; height: 100%; overflow: visible; }
+@keyframes bl-uzlet { 0% { transform: translate(0, 0) scale(1); opacity: 0; } 5% { opacity: 0.95; } 72% { opacity: 0.7; } 100% { transform: translate(var(--nj), var(--put, -1500px)) scale(0.5); opacity: 0; } }
+
+/* ==========================================================================
+   Popis tekstova: plavi sat pred zoru nad poljem
+   ========================================================================== */
+.bl-nebo {
+  --ph: clamp(250px, 27vw, 420px);
+  position: relative; isolation: isolate; overflow: hidden; padding: clamp(4px, 1.4vw, 22px) 0 0;
+  /* vrh je boja kojom završava noćna glava; prema dnu nebo svijetli, a iza grebena je ruž zore */
+  background:
+    radial-gradient(ellipse 88% 560px at 50% calc(100% - var(--ph) * 0.74), rgb(242 150 124 / 0.6), rgb(200 106 142 / 0.34) 36%, rgb(124 86 164 / 0.15) 60%, transparent 78%),
+    radial-gradient(ellipse 60% 440px at 24% 560px, rgb(84 96 204 / 0.3), transparent 70%),
+    linear-gradient(180deg, #080a16 0, #0b1027 150px, #121a40 430px, #1b2556 46%, #252b6a 66%, #37317a 84%, #4c3b80 100%);
+}
+.bl-zvijezde { position: absolute; inset: 0 0 var(--ph) 0; z-index: -3; -webkit-mask-image: linear-gradient(180deg, #000 52%, transparent); mask-image: linear-gradient(180deg, #000 52%, transparent); }
+.bl-oblak { z-index: -2; }
+.bl-oblak.a { top: 240px; height: 380px; opacity: 0.32; }
+.bl-oblak.b { bottom: calc(var(--ph) * 0.74); height: 300px; opacity: 0.46; animation-duration: 300s; animation-direction: alternate-reverse; }
+.bl-nebo > .bl-daleki { --dno: calc(var(--ph) * 0.56); }
+/* lampioni na srednjoj udaljenosti, uz rubove širokih ekrana: daju dubinu između dalekih i onih s tekstovima */
+.bl-srednji { position: absolute; inset: 0; z-index: -1; pointer-events: none; }
+.bl-srednji i { position: absolute; left: calc(50% + var(--x)); top: var(--y); width: var(--s); aspect-ratio: 40 / 56; opacity: var(--o, 0.9); animation: bl-plovi var(--t) ease-in-out var(--d) infinite alternate; }
+.bl-srednji i::before { content: ""; position: absolute; inset: -70% -120% -60%; border-radius: 50%; background: radial-gradient(ellipse 50% 50% at 50% 58%, rgb(255 200 116 / 0.42), rgb(255 150 80 / 0.12) 46%, transparent 70%); }
+.bl-srednji svg { position: relative; width: 100%; height: 100%; overflow: visible; }
+@keyframes bl-plovi { from { transform: translate(-6px, 12px) rotate(-2deg); } to { transform: translate(8px, -14px) rotate(2.4deg); } }
+.bl-in { position: relative; }
+
+/* kategorije: listići na jednoj niti; odabrani svijetli kao papir lampiona */
+.bl-nebo .filteri { position: relative; justify-content: center; gap: 10px; margin: 0 auto clamp(46px, 5.5vw, 80px); }
+.bl-nebo .filteri button {
+  position: relative; display: inline-flex; align-items: center; gap: 9px; min-height: 44px; padding: 0 16px 0 20px; border-radius: 999px;
+  border: 1px solid rgb(226 196 135 / 0.3); background: #111838; color: #d6ccb8; font-size: 14px; font-weight: 600;
+  transition: color 0.3s, border-color 0.3s, background-color 0.4s, box-shadow 0.5s;
+}
+.bl-nebo .filteri button:hover { border-color: var(--zlato-s); color: var(--bijela-t); }
+.bl-nebo .filteri button[aria-pressed="true"] {
+  border-color: #ffe9b8; color: #3b2206; background: linear-gradient(180deg, #d58a36 -30%, #f3c877 42%, #fff1c4 100%);
+  box-shadow: 0 0 30px 2px rgb(255 190 100 / 0.34), 0 14px 30px -12px rgb(255 160 70 / 0.6);
+}
+.bl-nebo .filteri button::after { content: attr(data-broj); min-width: 20px; text-align: center; padding: 1px 6px; border-radius: 999px; font-size: 11.5px; font-weight: 600; line-height: 1.5; font-variant-numeric: tabular-nums; background: rgb(226 196 135 / 0.14); color: var(--zlato-s); transition: background-color 0.4s, color 0.3s; }
+.bl-nebo .filteri button[aria-pressed="true"]::after { background: rgb(90 48 8 / 0.16); color: #5a3408; }
+@media (min-width: 700px) {
+  .bl-nebo .filteri::before { content: ""; position: absolute; z-index: -1; left: 50%; top: 50%; width: min(940px, 100%); height: 1px; translate: -50% 0; background: linear-gradient(90deg, transparent, rgb(226 196 135 / 0.42) 18%, rgb(226 196 135 / 0.42) 82%, transparent); }
+}
+
+/* tekstovi */
+.bl-nebo .objave { display: flex; flex-wrap: wrap; justify-content: center; align-items: flex-start; gap: clamp(46px, 5vw, 72px) 0; }
+.bl-nebo .objava { position: relative; flex: 0 0 25%; max-width: 25%; display: block; padding: 0 clamp(8px, 1vw, 16px); animation: none; }
+/* lampion se pri ulasku u ekran (i nakon promjene kategorije) digne na svoje mjesto */
+.bl-nebo .objava[data-reveal] { transform: translateY(130px); transition: opacity 1.3s var(--ease) calc(var(--i) * 110ms), transform 2.1s var(--ease-out) calc(var(--i) * 110ms); }
+.bl-nebo .objava[data-reveal][data-inview] { transform: none; }
+.bl-nebo .objava:nth-child(4n + 2) { margin-top: 58px; }
+.bl-nebo .objava:nth-child(4n + 3) { margin-top: 14px; }
+.bl-nebo .objava:nth-child(4n) { margin-top: 78px; }
+.bl-nebo .objave > p.mut { flex: 0 0 100%; padding: 40px 0 20px; text-align: center; }
+
+/* najnoviji tekst: velik lampion, uz njega opis */
+.bl-nebo .objava.objava-glavna {
+  flex: 0 0 100%; max-width: 1090px; display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: center; gap: clamp(36px, 6.4vw, 104px);
+  margin: 0 0 clamp(6px, 1.6vw, 26px); padding: 0; border: 0;
+}
+.bl-nebo .objava-glavna .bl-lebdi { --lw: clamp(240px, 27vw, 368px); }
+.bl-nebo .objava-glavna .bl-visak { max-width: min(330px, 86vw); }
+.bl-nebo .objava-glavna .objava-tijelo { padding-bottom: clamp(0px, 6vw, 90px); }
+.bl-nebo .objava-glavna .kat { font-size: 11.5px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--zlato-s); }
+.bl-nebo .objava-glavna h2 { margin-top: 16px; font-size: clamp(32px, 3.7vw, 54px); line-height: 1.06; color: var(--bijela-t); text-wrap: balance; transition: color 0.3s; }
+.bl-nebo .objava-glavna:hover h2 { color: var(--zlato-j); }
+.bl-nebo .objava-glavna p.mut { margin-top: 18px; max-width: 34em; font-size: clamp(16.5px, 1.25vw, 18px); line-height: 1.65; color: #d3c8b4; }
+.bl-nebo .objava-glavna .objava-min { margin-top: 14px; font-size: 13.5px; color: var(--noc-m); }
+.bl-dalje { margin-top: 24px; }
+/* rečenica iz teksta, rukom ispisana na cedulji velikog lampiona */
+.bl-zelja { padding: 34px 22px 20px; }
+.bl-zelja q { display: block; font-family: var(--rukopis); font-size: clamp(25px, 2.2vw, 31px); line-height: 1.18; quotes: none; color: #56361a; text-wrap: balance; }
+
+/* obzor: grebeni, polje s lampionima koji čekaju i magla koja prelazi u dan (blog/Nebo.tsx) */
+.bl-polje { position: relative; z-index: -1; height: var(--ph); margin-top: clamp(60px, 7vw, 110px); pointer-events: none; }
+.bl-polje-crtez { position: absolute; left: 0; bottom: -2px; width: 100%; height: calc(100% + 2px); max-width: none; display: block; }
+.bl-nebo::after { content: ""; display: block; height: clamp(24px, 4vw, 64px); background: var(--krem); }
+.bl-tlo { position: absolute; left: var(--x); top: var(--y); width: calc(clamp(14px, 1.6vw, 23px) * var(--v)); aspect-ratio: 40 / 56; translate: -50% -100%; animation: bl-zar 2.1s ease-in-out var(--d, 0s) infinite alternate; }
+
+/* ==========================================================================
+   Članak
+   ========================================================================== */
+.bl-clanak { --gk: clamp(170px, 18vw, 280px); --zrak: clamp(56px, 9vw, 150px); }
+.bl-clanak .clanak-glava { padding-bottom: calc(var(--gk) + clamp(26px, 4vw, 56px)); }
+.bl-clanak .clanak-glava:has(+ .clanak-slika) { padding-bottom: calc(var(--gk) + var(--zrak)); }
+.bl-clanak .clanak-glava h1 { font-size: clamp(38px, 5vw, 72px); margin-top: 20px; }
+.bl-clanak .clanak-meta { gap: 6px 0; }
+.bl-clanak .clanak-meta > * + *::before { content: ""; display: inline-block; width: 4px; height: 4px; margin: 0 14px 3px; rotate: 45deg; background: var(--zlato-s); opacity: 0.75; }
+
+/* slika: cijelo djelo, u paspartuu i uskom pozlaćenom okviru, na obzoru između noći i stranice */
+.bl-clanak .clanak-slika {
+  --okv: clamp(6px, 0.75vw, 10px); --pas: clamp(11px, 2.5vw, 34px);
+  position: relative; z-index: 2; width: min(calc(100% - 2 * var(--rub)), 840px, calc(590px * var(--omjer, 1.4)));
+  margin: calc(-1 * (var(--gk) * 0.74 + var(--zrak) * 0.56)) auto 0; border-radius: 0; overflow: visible; box-shadow: none;
+}
+.bl-okvir {
+  display: block; border: var(--okv) solid; border-color: #ecd596 #b08638 #86621f #d2ab5a; border-radius: 2px;
+  box-shadow: 0 0 0 1px #4f3a12, 0 70px 90px -56px rgb(12 16 44 / 0.75), 0 26px 44px -30px rgb(12 16 44 / 0.55);
+}
+.bl-paspartu { position: relative; display: block; padding: var(--pas); background: var(--bl-zrno), linear-gradient(160deg, #fdf8ee, #f2e7d3); background-size: 240px 240px, auto; box-shadow: inset 0 0 0 1px rgb(80 56 18 / 0.7), inset 0 3px 10px rgb(59 38 23 / 0.3); }
+.bl-clanak .clanak-slika img { display: block; width: 100%; height: auto; box-shadow: 0 0 0 1px rgb(59 38 23 / 0.3), 0 0 0 3px #fffdf6, 0 0 0 4px rgb(59 38 23 / 0.18); }
+.bl-clanak .clanak-slika figcaption { margin-top: clamp(16px, 2vw, 24px); text-align: center; font-family: var(--serif); font-style: italic; font-size: clamp(16.5px, 1.3vw, 18.5px); line-height: 1.35; color: var(--smeda-m); }
+.bl-autor { display: block; margin-bottom: 3px; font-family: var(--sans); font-style: normal; font-size: 11px; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--zlato-t); }
+
+/* tekst: mirna knjiška slova, uska mjera */
+.bl-clanak .clanak-tekst {
+  max-width: 31em; margin: 0 auto; padding-top: clamp(40px, 5vw, 66px);
+  font-family: var(--serif); font-size: clamp(20px, 1.55vw, 22.5px); line-height: 1.62; color: #37231a;
+  font-variant-numeric: oldstyle-nums; font-kerning: normal; hyphens: auto; -webkit-hyphens: auto; overflow-wrap: break-word;
+}
+.bl-clanak .clanak-tekst > * + * { margin-top: 1.02em; }
+.bl-clanak .clanak-tekst p { text-wrap: pretty; }
+/* prvi odlomak: uvod s inicijalom i prvim retkom u kapitalkama */
+.bl-clanak .clanak-tekst > p:first-child { font-size: 1.13em; line-height: 1.5; color: var(--smeda); }
+.bl-clanak .clanak-tekst > p:first-child::first-line { font-variant-caps: small-caps; letter-spacing: 0.045em; }
+.bl-clanak .clanak-tekst > p:first-child::first-letter { float: left; padding: 0.075em 0.1em 0 0; font-family: var(--serif); font-size: 3.5em; line-height: 0.76; font-variant-caps: normal; letter-spacing: 0; color: var(--zlato-t); }
+/* kratak prvi odlomak: sljedeći ne teče uz inicijal nego počinje ispod njega */
+.bl-clanak .clanak-tekst > p:first-child + * { clear: both; }
+.bl-clanak .clanak-tekst h2 { margin-top: 2.1em; font-size: clamp(29px, 2.7vw, 38px); line-height: 1.12; letter-spacing: -0.008em; hyphens: manual; -webkit-hyphens: manual; }
+/* nad svakim naslovom kratka zlatna crta sa sjajem zvijezde */
+.bl-clanak .clanak-tekst h2::before { content: ""; display: block; width: 92px; height: 15px; margin-bottom: 0.62em; background: var(--bl-sjaj) 0 50% / 15px 15px no-repeat, linear-gradient(90deg, var(--zlato), transparent) 21px 50% / 71px 1px no-repeat; }
+.bl-clanak .clanak-tekst h2 + p { margin-top: 0.7em; }
+.bl-clanak .clanak-tekst h3 { margin-top: 1.7em; font-size: 1.24em; font-style: italic; line-height: 1.25; hyphens: manual; -webkit-hyphens: manual; }
+.bl-clanak .clanak-tekst h3 + p { margin-top: 0.5em; }
+.bl-clanak .clanak-tekst strong { font-weight: 600; color: var(--smeda); }
+.bl-clanak .clanak-tekst a { color: var(--zlato-t); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; transition: color 0.3s; }
+.bl-clanak .clanak-tekst a:hover { color: var(--smeda); }
+/* popisi: oznaka je figura predstavnika iz konstelacije */
+.bl-clanak .clanak-tekst ul, .bl-clanak .clanak-tekst ol { display: grid; gap: 0.5em; padding-left: 0.2em; }
+.bl-clanak .clanak-tekst ul li { position: relative; padding-left: 1.55em; }
+.bl-clanak .clanak-tekst ul li::before { content: ""; position: absolute; left: 0.1em; top: 0.6em; width: 0.5em; height: 0.5em; border: 1.5px solid var(--zlato); border-radius: 50%; }
+.bl-clanak .clanak-tekst ul li::after { content: ""; position: absolute; left: calc(0.35em + 1.5px); top: calc(0.6em - 5px); margin-left: -3.5px; border: 3.5px solid transparent; border-top: 0; border-bottom: 4.5px solid var(--zlato); }
+.bl-clanak .clanak-tekst ol { counter-reset: bl-broj; }
+.bl-clanak .clanak-tekst ol li { position: relative; padding-left: 1.9em; counter-increment: bl-broj; }
+.bl-clanak .clanak-tekst ol li::before { content: counter(bl-broj) "."; position: absolute; left: 0; top: 0; font-style: italic; color: var(--zlato-t); }
+/* istaknuta misao: veća, u kurzivu, šira od stupca teksta */
+.bl-clanak .clanak-tekst blockquote { margin: 1.9em auto; font-family: var(--serif); font-style: italic; font-size: clamp(25px, 2.4vw, 33px); line-height: 1.28; text-align: center; color: var(--smeda); text-wrap: balance; hyphens: manual; -webkit-hyphens: manual; }
+.bl-clanak .clanak-tekst blockquote::before, .bl-clanak .clanak-tekst blockquote::after { content: ""; display: block; width: min(360px, 82%); height: 15px; margin: 0 auto 0.85em; background: var(--bl-sjaj) 50% 50% / 15px 15px no-repeat, linear-gradient(90deg, transparent, var(--zlato)) 0 50% / calc(50% - 16px) 1px no-repeat, linear-gradient(270deg, transparent, var(--zlato)) 100% 50% / calc(50% - 16px) 1px no-repeat; }
+.bl-clanak .clanak-tekst blockquote::after { width: min(150px, 40%); height: 1px; margin: 0.95em auto 0; background: linear-gradient(90deg, transparent, var(--zlato), transparent); }
+.bl-clanak .clanak-tekst blockquote > * + * { margin-top: 0.5em; }
+.bl-clanak .clanak-tekst hr { width: min(360px, 82%); height: 15px; margin: 2.2em auto; border: 0; background: var(--bl-sjaj) 50% 50% / 15px 15px no-repeat, linear-gradient(90deg, transparent, var(--zlato)) 0 50% / calc(50% - 16px) 1px no-repeat, linear-gradient(270deg, transparent, var(--zlato)) 100% 50% / calc(50% - 16px) 1px no-repeat; }
+.bl-clanak .clanak-tekst img { display: block; max-width: 100%; height: auto; margin: 1.8em auto; border-radius: 4px; }
+@media (min-width: 1000px) {
+  .bl-clanak .clanak-tekst blockquote { margin-inline: -64px; }
+}
+
+/* kraj teksta: ornament, oznake i dijeljenje */
+.bl-kraj-teksta { margin-top: clamp(44px, 5vw, 66px); }
+.bl-rep { display: grid; justify-items: center; gap: 22px; margin-top: clamp(30px, 3.6vw, 44px); padding-bottom: clamp(30px, 4vw, 56px); }
+.bl-rep .clanak-oznake { margin-top: 0; justify-content: center; }
+.bl-rep .oznake li { font-family: var(--serif); font-style: italic; font-size: 16px; padding: 5px 15px 6px; background: none; border-color: rgb(184 138 62 / 0.4); }
+.bl-rep .dijeli { justify-content: center; gap: 10px; margin: 0; padding-top: 0; border-top: 0; font-size: 14px; }
+.bl-rep .dijeli > span { margin-right: 6px; font-size: 11.5px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--zlato-t); }
+.bl-rep .dijeli a, .bl-rep .dijeli button { display: inline-flex; align-items: center; min-height: 40px; padding: 0 17px; border: 1px solid var(--linija); border-radius: 999px; background: var(--papir); font-weight: 600; color: var(--smeda); transition: border-color 0.3s, color 0.3s, background-color 0.3s; }
+.bl-rep .dijeli a:hover, .bl-rep .dijeli button:hover { border-color: var(--zlato); color: var(--zlato-t); background: var(--papir); }
+.bl-rep .dijeli button[data-kopirano] { border-color: var(--kadulja); background: var(--kadulja-s); color: var(--kadulja-t); }
+
+/* dno članka: dan stranice prelazi u sumrak pa u noć podnožja; pod prvim zvijezdama je poziv, a ispod njega lampioni s daljnjim tekstovima */
+.bl-sumrak {
+  position: relative; isolation: isolate; overflow: hidden; text-align: center; color: var(--noc-t);
+  padding: clamp(330px, 30vw, 430px) 0 clamp(80px, 9vw, 124px);
+  background: linear-gradient(180deg, var(--krem) 0, #f6d9a8 80px, #f0a56c 180px, #c9647a 280px, #6a4682 370px, #2b2f66 470px, #161d38 620px, #141b36 62%, var(--noc-2) 100%);
+}
+.bl-sumrak > .oblaci { z-index: -1; top: 30px; height: 330px; opacity: 0.85; }
+.bl-sumrak-zvijezde { position: absolute; inset: 300px 0 0 0; z-index: -2; -webkit-mask-image: linear-gradient(180deg, transparent, #000 260px); mask-image: linear-gradient(180deg, transparent, #000 260px); }
+.bl-sumrak > .bl-daleki { --put: -1250px; -webkit-mask-image: linear-gradient(180deg, transparent 330px, #000 640px); mask-image: linear-gradient(180deg, transparent 330px, #000 640px); }
+.bl-sumrak .clanak-poziv { display: block; margin: 0; padding: 0; border-radius: 0; background: none; color: inherit; }
+.bl-sumrak .clanak-poziv .ornament { color: var(--zlato-s); }
+.bl-sumrak .clanak-poziv h2 { max-width: 860px; margin: 26px auto 0; font-size: clamp(36px, 4.4vw, 64px); color: var(--bijela-t); }
+.bl-sumrak .clanak-poziv h2 .em { color: var(--zlato-s); }
+.bl-sumrak .clanak-poziv p { max-width: 560px; margin: 20px auto 0; font-size: inherit; color: var(--noc-m); }
+.bl-sumrak .clanak-poziv .gumbi { flex-direction: row; justify-content: center; margin-top: 36px; }
+
+.bl-sumrak .sek.clanak-jos { padding: clamp(96px, 11vw, 160px) 0 0; background: radial-gradient(ellipse 58% 46% at 50% 56%, rgb(74 84 190 / 0.26), transparent 72%); }
+.bl-sumrak .clanak-jos .oz { justify-content: center; gap: 18px; color: var(--zlato-s); }
+.bl-sumrak .clanak-jos .oz::before, .bl-sumrak .clanak-jos .oz::after { content: ""; width: clamp(40px, 9vw, 120px); height: 1px; background: linear-gradient(90deg, transparent, rgb(226 196 135 / 0.6)); }
+.bl-sumrak .clanak-jos .oz::after { rotate: 180deg; }
+.bl-sumrak .clanak-jos-mreza { display: flex; justify-content: center; align-items: flex-start; gap: 0 clamp(14px, 9vw, 150px); margin-top: clamp(44px, 5vw, 66px); }
+.bl-sumrak .clanak-jos-mreza a { display: block; flex: 0 1 290px; min-width: 0; padding: 0; border: 0; }
+.bl-sumrak .clanak-jos-mreza a:nth-child(2) { margin-top: 54px; }
+.bl-sumrak .clanak-jos-mreza .bl-lebdi { --lw: clamp(128px, 14vw, 184px); }
+.bl-sumrak .clanak-jos-mreza a:hover .blog-sl img { transform: scale(1.07); }
+.bl-svi { margin-top: clamp(50px, 6vw, 80px); }
+
+@media (max-width: 1100px) {
+  .bl-nebo .objava { flex-basis: 33.333%; max-width: 33.333%; }
+  .bl-lebdi { --lw: clamp(150px, 17vw, 190px); }
+}
+@media (max-width: 900px) {
+  .bl-nebo .objava.objava-glavna { grid-template-columns: minmax(0, 1fr); justify-items: center; gap: 34px; text-align: center; }
+  .bl-nebo .objava-glavna p.mut { margin-inline: auto; }
+  .bl-nebo .objava-glavna .objava-tijelo { padding-bottom: 0; }
+}
+@media (max-width: 780px) {
+  .bl-nebo .objava { flex-basis: 50%; max-width: 50%; }
+  .bl-nebo .objava:nth-child(n) { margin-top: 0; }
+  .bl-nebo .objava:nth-child(2n + 1):not(.objava-glavna) { margin-top: 54px; }
+  .bl-lebdi { --lw: clamp(124px, 24vw, 180px); }
+}
+@media (max-width: 560px) {
+  .bl-nebo .filteri { gap: 8px; }
+  .bl-nebo .filteri button { min-height: 42px; padding: 0 12px 0 16px; font-size: 13.5px; }
+  .bl-nebo .objava { padding: 0 5px; }
+  .bl-cedulja { padding: 27px 10px 15px; }
+  .bl-cedulja h2, .bl-cedulja h3 { font-size: 18px; }
+  .bl-cedulja .kat { letter-spacing: 0.16em; }
+  .bl-zelja { padding: 32px 16px 18px; }
+  .bl-cedulja .objava-min .bl-nb { display: block; }
+  .bl-cedulja .objava-min .bl-tocka { display: none; }
+  .bl-clanak .clanak-meta { gap: 4px 20px; }
+  .bl-clanak .clanak-meta > * + *::before { display: none; }
+  .bl-sumrak .clanak-jos-mreza { gap: 0 10px; }
+  .bl-sumrak .clanak-jos-mreza a { flex-basis: 50%; }
+  .bl-sumrak .clanak-jos-mreza .bl-lebdi { --lw: 124px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .bl-daleki { display: none; }
+}

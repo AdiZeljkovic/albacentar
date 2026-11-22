@@ -1,0 +1,338 @@
+/* Stranice Knjige, Pratnja i Privatnost: stilovi redizajna u jeziku naslovnice. Učitava se nakon stranice.css. */
+
+:root {
+  /* zrno papira: sitan šum umjesto ravne boje */
+  --kg-zrno: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='z' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .45  0 0 0 0 .32  0 0 0 0 .17  0 0 0 .5 -.13'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23z)'/%3E%3C/svg%3E");
+  /* sjaj zvijezde (lib/zvijezda.ts) kao sličica za kutove i natuknice */
+  --kg-iskra: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-13 -13 26 26'%3E%3Cpath fill='%23b88a3e' d='M0 -12 L0.75 0 L0 12 L-0.75 0Z M-9 0 L0 0.7 L9 0 L0 -0.7Z M-2.7 -2.7 L0.42 -0.42 L2.7 2.7 L-0.42 0.42Z M2.7 -2.7 L0.42 0.42 L-2.7 2.7 L-0.42 -0.42Z M-1.5 0 A1.5 1.5 0 1 0 1.5 0 A1.5 1.5 0 1 0 -1.5 0Z'/%3E%3C/svg%3E");
+  --kg-zvijezda: polygon(50% 0, 52% 46%, 62% 38%, 54% 48%, 100% 50%, 54% 52%, 62% 62%, 52% 54%, 50% 100%, 48% 54%, 38% 62%, 46% 52%, 0 50%, 46% 48%, 38% 38%, 48% 46%);
+}
+
+/* ==========================================================================
+   KNJIGE
+   ========================================================================== */
+
+/* ---------- „Korijeni i krila": čitaonica s naslovnice izbliza. Vrh je boje dna glave (#080a16) ---------- */
+.kg-soba-sek { position: relative; isolation: isolate; overflow: hidden; background: #080a16; color: var(--noc-t); }
+.kg-soba { position: relative; padding: clamp(24px, 3vw, 50px) 0 22px; }
+/* zid s policama (Odaja) seže ispod stola, da njegovo zatamnjenje pri dnu ostane skriveno */
+.kg-zid {
+  position: absolute; inset: 0 0 -220px 0; z-index: -1; pointer-events: none;
+  background: radial-gradient(ellipse 36% 40% at 22% 62%, rgb(190 110 50 / 0.28), transparent 72%);
+  -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 180px); mask-image: linear-gradient(180deg, transparent 0, #000 180px);
+}
+/* nevidljiv „prozor": odavde Odaja pušta snop mjesečine niz zid */
+.kg-mjesecina { position: absolute; left: 0; top: -70px; width: 250px; height: 300px; }
+
+.kg-uvod { max-width: 820px; margin: 0 auto clamp(40px, 6vw, 86px); text-align: center; display: grid; gap: clamp(20px, 2.4vw, 30px); }
+.kg-uvod p { font-family: var(--serif); font-size: clamp(22px, 2.3vw, 31px); line-height: 1.38; color: var(--bijela-t); text-wrap: balance; }
+
+.kg-kik { position: relative; z-index: 1; display: grid; grid-template-columns: minmax(0, 46fr) minmax(0, 54fr); align-items: end; scroll-margin-top: calc(var(--traka) + 24px); }
+.kg-kik .kg-tekst { align-self: center; padding: 0 0 clamp(40px, 6vw, 90px) clamp(30px, 5vw, 84px); }
+.kg-tekst h2 { margin-top: 14px; }
+.kg-pod { font-family: var(--serif); font-style: italic; font-size: clamp(21px, 2vw, 27px); line-height: 1.25; color: var(--zlato-s); margin-top: 10px; }
+.kg-tekst .proza { margin-top: 24px; }
+.kg-tekst .proza .uvod { color: var(--noc-t); }
+
+/* prizor na stolu; mjere u jedinici --u (1/560 širine prizora) */
+.kg-pozornica { --u: calc(100cqw / 560); position: relative; container-type: inline-size; aspect-ratio: 560 / 610; width: 100%; max-width: 600px; }
+.kg-odsjaj { position: absolute; left: calc(-120 * var(--u)); bottom: -22px; width: calc(560 * var(--u)); height: 30px; background: radial-gradient(ellipse 46% 120% at 32% 34%, rgb(255 190 110 / 0.62), transparent 72%); }
+
+/* svijeća (i na stranici Pratnja) */
+.kg-svijeca { position: absolute; left: calc(30 * var(--u)); bottom: calc(3 * var(--u)); width: calc(56 * var(--u)); height: calc(170 * var(--u)); }
+.kg-svijeca > i { position: absolute; display: block; }
+.kg-tanjur { left: 0; bottom: 0; width: 100%; height: calc(13 * var(--u)); border-radius: 50%; background: linear-gradient(180deg, #e9cd92, #8f6d2f); box-shadow: 0 calc(3 * var(--u)) calc(8 * var(--u)) rgb(0 0 0 / 0.55), inset 0 calc(2 * var(--u)) calc(2 * var(--u)) rgb(255 243 207 / 0.6); }
+.kg-vosak { left: calc(17 * var(--u)); bottom: calc(6 * var(--u)); width: calc(22 * var(--u)); height: calc(84 * var(--u)); border-radius: calc(5 * var(--u)) calc(4 * var(--u)) calc(2 * var(--u)) calc(2 * var(--u)) / calc(7 * var(--u)) calc(4 * var(--u)) calc(2 * var(--u)) calc(2 * var(--u)); background: linear-gradient(180deg, rgb(255 176 84 / 0.62), transparent 38%), linear-gradient(90deg, #b9a37c, #fff4dc 38%, #ecd9b6 66%, #94805c); }
+.kg-stijenj { left: calc(27.2 * var(--u)); bottom: calc(89 * var(--u)); width: calc(1.6 * var(--u)); height: calc(9 * var(--u)); background: #2a1c14; }
+.kg-plamen {
+  left: calc(19 * var(--u)); bottom: calc(94 * var(--u)); width: calc(18 * var(--u)); height: calc(42 * var(--u)); border-radius: 50% 50% 50% 50% / 64% 64% 36% 36%;
+  background: radial-gradient(ellipse 50% 60% at 50% 72%, #fff 0, #fff5cc 26%, #ffc74f 52%, #ff8f24 76%, rgb(255 120 30 / 0) 100%);
+  box-shadow: 0 0 calc(18 * var(--u)) calc(4 * var(--u)) rgb(255 170 70 / 0.5);
+  transform-origin: 50% 100%; animation: plamen 1.1s ease-in-out infinite alternate, plamen-njih 0.37s ease-in-out infinite alternate;
+}
+.kg-plamen i { position: absolute; left: 30%; right: 30%; bottom: 3%; height: 28%; border-radius: 50%; background: radial-gradient(#8fbcff, transparent 70%); opacity: 0.7; }
+.kg-zar {
+  left: 50%; bottom: calc(112 * var(--u)); width: calc(360 * var(--u)); height: calc(360 * var(--u)); translate: -50% 50%; border-radius: 50%; pointer-events: none;
+  background: radial-gradient(circle, rgb(255 190 100 / 0.42), rgb(255 150 70 / 0.14) 34%, transparent 66%);
+  animation: zar-svijece 1.9s ease-in-out infinite alternate;
+}
+
+/* knjiga stoji na stolu; svijeća je obasjava slijeva */
+.kg-knjiga { position: absolute; z-index: 2; left: calc(150 * var(--u)); bottom: calc(1 * var(--u)); perspective: calc(1600 * var(--u)); }
+.kg-knjiga .k3d { --kw: calc(280 * var(--u)); --kd: calc(38 * var(--u)); animation: none; }
+.kg-knjiga:hover .k3d { --k-ry: -10deg; }
+.kg-knjiga::after { content: ""; position: absolute; z-index: -1; left: 2%; right: -22%; bottom: calc(-13 * var(--u)); height: calc(30 * var(--u)); border-radius: 50%; background: radial-gradient(ellipse, rgb(0 0 0 / 0.72), transparent 70%); }
+.kg-pozornica .k3d-straznja { box-shadow: calc(26 * var(--u)) calc(30 * var(--u)) calc(50 * var(--u)) calc(-16 * var(--u)) rgb(0 0 0 / 0.8); }
+.kg-pozornica .k3d-hrbat span { font-size: calc(13 * var(--u)); }
+.kg-pozornica .k3d-prednja::after { opacity: 1; background: linear-gradient(100deg, rgb(255 186 104 / 0.26), transparent 42%, rgb(9 12 28 / 0.28)); }
+
+/* krila: ptice polijeću iz knjige i šire se kao krošnja */
+.kg-ptice { position: absolute; z-index: 3; left: calc(290 * var(--u)); top: calc(200 * var(--u)); width: 0; height: 0; pointer-events: none; }
+.kg-ptica {
+  position: absolute; left: 0; top: 0; width: calc(38 * var(--u) * var(--v, 1)); height: auto; max-width: none; margin: calc(-13 * var(--u)) 0 0 calc(-19 * var(--u)); overflow: visible; opacity: 0;
+  animation: kg-let var(--t, 12s) cubic-bezier(0.3, 0.1, 0.5, 1) var(--d, 0s) infinite;
+}
+@keyframes kg-let {
+  0% { transform: translate(0, 0) scale(0.3); opacity: 0; }
+  10% { opacity: 1; }
+  50% { transform: translate(calc(var(--mx) * var(--u)), calc(var(--my) * var(--u))) scale(1); opacity: 1; }
+  84% { opacity: 0.7; }
+  100% { transform: translate(calc(var(--ex) * var(--u)), calc(var(--ey) * var(--u))) scale(0.45); opacity: 0; }
+}
+
+/* ploha stola: tanka traka preko cijele širine, s mrakom gdje se zid spušta na stol */
+.kg-stol-ploha { position: absolute; left: 0; right: 0; bottom: 0; height: 30px; display: block; background: linear-gradient(180deg, #1a1211, #3b271f); }
+.kg-stol-ploha::before { content: ""; position: absolute; left: 0; right: 0; bottom: 100%; height: 90px; background: linear-gradient(180deg, transparent, rgb(4 4 10 / 0.6)); }
+
+/* ---------- ispod stola: čelo stola, pa tama u kojoj korijenje svijetli. Dno je boje vrha sljedećeg prizora ---------- */
+.kg-podzemlje {
+  position: relative; isolation: isolate; padding-bottom: clamp(84px, 9vw, 130px);
+  background: linear-gradient(180deg, #2c1d1a 0, #1b1216 66px, #06050b 68px, #0a0912 170px, #110d13 44%, #0c0b16 78%, #080a16 100%);
+}
+/* čelo stola: godovi drva (šum razvučen vodoravno) i odsjaj svijeće na rubu */
+.kg-podzemlje::before {
+  content: ""; position: absolute; z-index: -1; left: 0; right: 0; top: 0; height: 66px;
+  background:
+    linear-gradient(180deg, rgb(255 214 150 / 0.55) 0, rgb(255 214 150 / 0) 1.5px),
+    radial-gradient(ellipse 520px 120% at max(10vw, calc(50% - 470px)) 0, rgb(255 176 96 / 0.3), transparent 70%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='900' height='66'%3E%3Cfilter id='d' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.004 .32' numOctaves='3' seed='4' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .95  0 0 0 0 .72  0 0 0 0 .5  1.5 0 0 0 -.62'/%3E%3C/filter%3E%3Crect width='900' height='66' filter='url(%23d)' opacity='.28'/%3E%3C/svg%3E");
+}
+.kg-tlo { position: absolute; z-index: -1; inset: 0; width: 100%; height: 100%; max-width: none; pointer-events: none; }
+
+/* korijenje: crtež u mjerama 1240 × 650, natpisi vise ispod vrhova */
+.kg-korijenje { --u: calc(100cqw / 1240); position: relative; container-type: inline-size; }
+.kg-kor-crtez { aspect-ratio: 1240 / 650; clip-path: circle(0% at 23.4% 0); transition: clip-path 3.8s cubic-bezier(0.3, 0.6, 0.3, 1) 0.15s; }
+.kg-korijenje[data-inview] .kg-kor-crtez { clip-path: circle(100% at 23.4% 0); }
+.kg-kor-crtez svg { width: 100%; height: 100%; max-width: none; overflow: visible; }
+.kg-kor-crtez .polje-kometa.sjaj { stroke-width: 7; }
+.kg-kor-crtez .polje-kometa.rep { stroke-width: 1.6; }
+.kg-kor-crtez .polje-kometa.glava { stroke-width: 3; }
+.kg-kor-malo { display: none; }
+.kg-kor-naslov {
+  position: absolute; left: calc(690 * var(--u)); top: calc(26 * var(--u)); max-width: calc(540 * var(--u));
+  font-family: var(--serif); font-style: italic; font-size: clamp(19px, calc(25 * var(--u)), 26px); line-height: 1.28; color: var(--zlato-j);
+}
+.kg-kor-popis li {
+  position: absolute; left: calc((var(--x) - 110) * var(--u)); top: calc((var(--y) + 20) * var(--u)); width: calc(220 * var(--u));
+  text-align: center; font-family: var(--serif); font-size: clamp(15.5px, calc(19.5 * var(--u)), 20px); line-height: 1.26; color: #f3e7cf; text-wrap: balance;
+}
+
+.kg-kraj { max-width: 860px; margin: clamp(50px, 6vw, 90px) auto 0; text-align: center; display: grid; gap: clamp(34px, 4vw, 54px); justify-items: center; }
+.kg-zakljucak { max-width: 62ch; color: var(--noc-m); }
+.kg-citat { position: relative; padding: clamp(30px, 3.6vw, 46px) 0; }
+.kg-citat::before, .kg-citat::after { content: ""; position: absolute; left: 50%; width: min(300px, 70%); height: 1px; translate: -50% 0; background: linear-gradient(90deg, transparent, rgb(226 196 135 / 0.75) 30%, rgb(226 196 135 / 0.75) 70%, transparent); }
+.kg-citat::before { top: 0; }
+.kg-citat::after { bottom: 0; }
+.kg-citat svg { width: 30px; height: 30px; margin: 0 auto 16px; color: var(--zlato-j); overflow: visible; }
+.kg-citat p { font-family: var(--serif); font-style: italic; font-size: clamp(27px, 3.3vw, 46px); line-height: 1.2; color: var(--bijela-t); text-wrap: balance; }
+
+/* ---------- „Nevidljive niti": noćno nebo; vrh je boje dna prizora iznad, dno je boje vrha prijelaza u dan ---------- */
+.kg-niti-sek {
+  position: relative; isolation: isolate; overflow: hidden; padding: clamp(50px, 6vw, 90px) 0 clamp(90px, 10vw, 140px); color: var(--noc-t);
+  background:
+    radial-gradient(ellipse 62% 380px at 50% calc(100% + 100px), rgb(84 96 204 / 0.5), transparent 70%),
+    radial-gradient(ellipse 50% 26% at 22% 30%, rgb(78 62 156 / 0.26), transparent 70%),
+    radial-gradient(ellipse 44% 24% at 80% 50%, rgb(44 78 170 / 0.24), transparent 70%),
+    linear-gradient(180deg, #080a16 0, #0b1027 22%, #121a40 62%, #1b2556 100%);
+}
+.kg-niti-nebo { position: absolute; inset: 0; z-index: -1; -webkit-mask-image: linear-gradient(180deg, transparent, #000 260px); mask-image: linear-gradient(180deg, transparent, #000 260px); }
+/* prizor u jedinici --u (1/1240 širine): zviježđe je gore, knjiga pod čvorom u koji se niti skupljaju */
+.kg-niti { --u: calc(100cqw / 1240); position: relative; container-type: inline-size; display: grid; grid-template-columns: minmax(0, 54fr) minmax(0, 46fr); align-items: start; scroll-margin-top: calc(var(--traka) + 24px); }
+.kg-zvijezdje { max-width: none; overflow: visible; pointer-events: none; }
+.kg-zvijezdje.siroko { position: absolute; left: 0; top: 0; width: 100%; height: auto; }
+.kg-zvijezdje.usko { display: none; }
+.kg-niti > .kg-tekst { grid-column: 1; grid-row: 1; padding: calc(366 * var(--u)) clamp(30px, 6vw, 96px) 0 0; }
+.kg-niti-knjiga { grid-column: 2; grid-row: 1; padding-top: calc(392 * var(--u)); display: grid; justify-items: center; }
+.kg-niti-okvir { perspective: 1600px; }
+.kg-niti-okvir .k3d { --kw: calc(290 * var(--u)); --kd: calc(36 * var(--u)); --k-ry: -20deg; }
+.kg-niti-okvir:hover .k3d { --k-ry: -8deg; }
+.kg-niti-okvir .k3d-straznja { box-shadow: 30px 44px 70px -24px rgb(2 3 12 / 0.85), 0 0 90px -10px rgb(120 140 255 / 0.28); }
+.kg-niti-kraj { margin-top: 1.05em; max-width: 68ch; color: var(--noc-m); }
+
+/* nit se gotovo ne vidi dok je svjetlo ne dotakne */
+.kg-nit { fill: none; stroke: #e9cd92; stroke-width: 0.8; stroke-dasharray: 1 5; stroke-linecap: round; opacity: 0.22; }
+.kg-nit.jaka { stroke: #fff0c4; stroke-width: 1.1; stroke-dasharray: none; opacity: 0; animation: kg-nit 9s ease-in-out var(--d, 0s) infinite; }
+@keyframes kg-nit { 0%, 62%, 100% { opacity: 0; } 16%, 40% { opacity: 0.7; } }
+.kg-clan { pointer-events: auto; }
+.kg-clan:hover .kg-nit.jaka { animation: none; opacity: 1; }
+.kg-clan text { font-family: var(--sans); font-weight: 600; fill: #cdbb94; text-transform: uppercase; transition: fill 0.3s; }
+.kg-clan:hover text { fill: #fff4e0; }
+.kg-zvijezdje .polje-kometa.sjaj { stroke-width: 5; }
+.kg-zvijezdje .polje-kometa.rep { stroke-width: 1; }
+.kg-zvijezdje .polje-kometa.glava { stroke-width: 2.2; }
+.kg-cvor-sjaj { animation: dise 6s ease-in-out infinite; }
+.usko .kg-nit { stroke-width: 0.6; }
+.usko .kg-nit.jaka { stroke-width: 0.8; }
+
+/* ---------- obrazac: list papira u jutru, s vrpcom za označavanje stranice ---------- */
+.kg-obavijest { padding-top: clamp(50px, 6vw, 90px); }
+/* rub magle iznad zna ostaviti vlas sive crte na necijelim visinama; ova traka boje stranice je prekrije */
+.kg-obavijest::before { content: ""; position: absolute; left: 0; right: 0; top: -1px; height: 7px; background: var(--krem); }
+.kg-jutro { position: absolute; inset: 0 0 auto 0; height: 320px; overflow: hidden; pointer-events: none; }
+.obavijest-kartica.kg-list {
+  position: relative; border-radius: 5px; border: 1px solid #dcc59f; padding: clamp(44px, 5.6vw, 78px) clamp(24px, 5.4vw, 76px) clamp(36px, 4.6vw, 64px);
+  background: var(--kg-zrno), linear-gradient(180deg, #fffdf8, var(--papir));
+  box-shadow: inset 0 1px 0 #fff, 0 44px 70px -44px rgb(59 38 23 / 0.5), 0 2px 5px rgb(59 38 23 / 0.06);
+}
+/* dvostruki zlatni rub sa sjajem zvijezde u kutovima */
+.kg-list::before { content: ""; position: absolute; inset: 10px; border: 1px solid rgb(184 138 62 / 0.5); border-radius: 2px; pointer-events: none; }
+.kg-list::after {
+  content: ""; position: absolute; inset: -2px; pointer-events: none;
+  background: var(--kg-iskra) left top / 25px 25px no-repeat, var(--kg-iskra) right top / 25px 25px no-repeat, var(--kg-iskra) left bottom / 25px 25px no-repeat, var(--kg-iskra) right bottom / 25px 25px no-repeat;
+}
+.kg-vrpca { position: absolute; z-index: 1; right: clamp(34px, 9%, 80px); top: -9px; width: 24px; height: 96px; background: linear-gradient(90deg, #46552f, #6f8250 42%, #56663f 70%, #46552f); clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 84%, 0 100%); }
+.kg-list h2 { font-size: clamp(34px, 3.8vw, 52px); }
+/* izbor knjiga: dvije male korice; odabrana dobije zlatni pečat */
+.kg-list .obavijest-knjige .izbor {
+  flex-direction: row-reverse; justify-content: space-between; align-items: center; padding: 22px 20px 22px 34px; border-radius: 3px 9px 9px 3px; border-color: #d8c4a0;
+  background: linear-gradient(105deg, #efe0c8 0%, var(--krem) 18%, #fffaf2 60%, #f1e2cb 100%); color: var(--smeda); opacity: 0.6;
+  box-shadow: 0 16px 24px -20px rgb(59 38 23 / 0.6);
+}
+.kg-list .obavijest-knjige .izbor::before { content: ""; position: absolute; left: 14px; top: 0; bottom: 0; width: 1px; background: rgb(59 38 23 / 0.14); }
+.kg-list .obavijest-knjige .izbor:nth-child(2) { background: radial-gradient(ellipse 90% 80% at 60% 100%, #2e3b6e, transparent 70%), linear-gradient(160deg, #1e2748, #111730); border-color: rgb(217 181 111 / 0.45); color: var(--bijela-t); }
+.kg-list .obavijest-knjige .izbor:nth-child(2)::before { background: rgb(246 234 210 / 0.14); }
+.kg-list .obavijest-knjige .izbor:has(input:checked) { opacity: 1; border-color: var(--zlato); box-shadow: 0 18px 28px -18px rgb(59 38 23 / 0.7); }
+.kg-list .obavijest-knjige .izbor b { font-family: var(--serif); font-weight: 400; font-size: 22px; line-height: 1.15; }
+.kg-list .obavijest-knjige .tocka { margin-top: 0; width: 26px; height: 26px; background: transparent; border-color: var(--zlato-s); transition: border-color 0.3s, background 0.3s; }
+.kg-list .obavijest-knjige .tocka::after { width: 11px; height: 6px; margin-top: -3px; border-radius: 0; background: none; border-left: 2px solid var(--noc); border-bottom: 2px solid var(--noc); transform: rotate(-45deg) scale(0); }
+.kg-list .obavijest-knjige .izbor:has(input:checked) .tocka { border-color: var(--zlato-s); background: var(--zlato-s); }
+.kg-list .obavijest-knjige .izbor:has(input:checked) .tocka::after { transform: rotate(-45deg) scale(1); }
+
+/* ==========================================================================
+   PRATNJA: mirno i toplo. Dan stranice, predvečerje uz prozor, pa sumrak završnog poziva
+   ========================================================================== */
+
+/* ---------- uvod: tekst na papiru stranice; kasno svjetlo pada zdesna ---------- */
+.kg-pr-uvod { padding: clamp(50px, 6vw, 90px) 0 clamp(64px, 7.5vw, 110px); background: radial-gradient(ellipse 46% 58% at 104% 44%, rgb(250 204 138 / 0.3), transparent 70%); }
+.kg-pr-mreza { display: grid; grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.18fr); gap: clamp(40px, 6vw, 96px); align-items: start; }
+.kg-pr-naslov { position: sticky; top: calc(var(--traka) + 30px); }
+.kg-pr-naslov h2 { margin-top: 14px; }
+.kg-pr-proza { position: relative; display: grid; gap: 1.35em; padding-left: clamp(26px, 3.6vw, 52px); }
+.kg-pr-proza::before { content: ""; position: absolute; left: 0; top: 16px; bottom: 4px; width: 1px; background: linear-gradient(180deg, var(--zlato), rgb(184 138 62 / 0.08)); }
+.kg-pr-proza::after { content: ""; position: absolute; left: -11.5px; top: -6px; width: 24px; height: 24px; background: var(--kg-iskra) center / contain no-repeat; }
+.kg-pr-prvi { font-family: var(--serif); font-size: clamp(23px, 2.25vw, 31px); line-height: 1.36; max-width: 30em; }
+.kg-pr-proza .mut { max-width: 60ch; font-size: clamp(17px, 1.3vw, 18.5px); line-height: 1.75; }
+.kg-pr-hellinger { max-width: 34em; padding-top: 1.25em; font-family: var(--serif); font-style: italic; font-size: clamp(19px, 1.65vw, 22.5px); line-height: 1.45; color: var(--smeda-m); background: linear-gradient(90deg, rgb(184 138 62 / 0.6), rgb(184 138 62 / 0)) 0 0 / min(260px, 70%) 1px no-repeat; }
+
+/* ---------- predvečerje: prozor u sumrak sa svijećom, uz njega popis ---------- */
+.kg-pr-vecer { overflow: clip; background: linear-gradient(180deg, var(--krem) 0, #f6e9d5 180px, #f3e2ca 56%, var(--krem) 100%); }
+.kg-pr-dva { display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); gap: clamp(40px, 7vw, 110px); align-items: center; }
+.kg-vecer-stupac { display: flex; justify-content: center; }
+/* crtež 360 × 520; svijeća je u jedinici --u */
+.kg-vecer { --u: calc(100cqw / 430); position: relative; isolation: isolate; container-type: inline-size; width: 100%; max-width: 400px; aspect-ratio: 360 / 520; }
+/* svjetlo svijeće na zidu oko prozora: diše zajedno s plamenom */
+.kg-vecer::before {
+  content: ""; position: absolute; z-index: -1; inset: -20% -34% -16%; pointer-events: none;
+  background: radial-gradient(ellipse 50% 46% at 58% 70%, rgb(255 188 108 / 0.4), rgb(255 200 130 / 0.13) 52%, transparent 72%);
+  animation: zar-svijece 2.8s ease-in-out infinite alternate;
+}
+/* sjena pod daskom prozora */
+.kg-vecer::after { content: ""; position: absolute; z-index: -1; left: 4%; right: 4%; bottom: 1.5%; height: 7%; border-radius: 50%; background: radial-gradient(ellipse, rgb(59 38 23 / 0.38), transparent 70%); }
+.kg-vecer > svg { width: 100%; height: 100%; max-width: none; overflow: visible; }
+.kg-vecer .kg-svijeca { left: 59%; bottom: 6.6%; }
+/* ovdje plamen gori mirnije nego u čitaonici */
+.kg-vecer .kg-plamen { animation-duration: 1.9s, 0.83s; }
+.kg-vecer .kg-zar { width: calc(300 * var(--u)); height: calc(300 * var(--u)); animation-duration: 2.8s; }
+.kg-vp-iskra { animation: kg-vp-treperi 9s ease-in-out var(--d, 0s) infinite; }
+@keyframes kg-vp-treperi { 0%, 100% { opacity: 0.3; } 50% { opacity: 1; } }
+
+.kg-pr-sadrzaj h2 { margin-top: 14px; font-size: clamp(32px, 3.6vw, 54px); }
+.kg-pr-popis { margin-top: clamp(28px, 3.4vw, 46px); max-width: 640px; }
+.kg-pr-popis li {
+  display: grid; grid-template-columns: 56px minmax(0, 1fr); align-items: baseline; padding: 19px 0 21px;
+  font-family: var(--serif); font-size: clamp(21px, 1.9vw, 25.5px); line-height: 1.26;
+  background: linear-gradient(90deg, rgb(184 138 62 / 0.65), rgb(184 138 62 / 0.16) 68%, rgb(184 138 62 / 0)) 0 0 / 100% 1px no-repeat;
+}
+.kg-pr-popis li:last-child { background: linear-gradient(90deg, rgb(184 138 62 / 0.65), rgb(184 138 62 / 0.16) 68%, rgb(184 138 62 / 0)) 0 0 / 100% 1px no-repeat, linear-gradient(90deg, rgb(184 138 62 / 0.65), rgb(184 138 62 / 0.16) 68%, rgb(184 138 62 / 0)) 0 100% / 100% 1px no-repeat; }
+.kg-pr-popis li span { font-family: var(--sans); font-size: 12px; letter-spacing: 0.2em; font-weight: 600; color: var(--zlato-t); }
+.napomena.kg-pr-napomena {
+  position: relative; max-width: 760px; margin: clamp(56px, 6.5vw, 96px) auto 0; padding: 30px clamp(22px, 4vw, 48px) 26px; text-align: center; font-size: 15.5px; line-height: 1.65;
+  border: 1px solid #dcc59f; border-radius: 4px; background: var(--kg-zrno), var(--papir); box-shadow: 0 26px 44px -34px rgb(59 38 23 / 0.45);
+}
+.kg-pr-napomena::before { content: ""; position: absolute; left: 50%; top: -18px; width: 36px; height: 36px; margin-left: -18px; border: 1px solid #dcc59f; border-radius: 50%; background: var(--kg-iskra) center / 22px 22px no-repeat, var(--papir); }
+
+/* ==========================================================================
+   ZAŠTITA PRIVATNOSTI: dokument na listu papira
+   ========================================================================== */
+.kg-pravni-sek { padding: clamp(30px, 4vw, 60px) 0 clamp(90px, 8vw, 120px); }
+.kg-pravni-sek .uska { max-width: calc(900px + 2 * var(--rub)); }
+.kg-arak {
+  position: relative; border: 1px solid #dcc59f; border-radius: 4px; padding: clamp(44px, 6vw, 84px) clamp(24px, 7.4vw, 104px) clamp(40px, 5vw, 68px);
+  background: var(--kg-zrno), linear-gradient(180deg, #fffdf8, var(--papir));
+  box-shadow: inset 0 1px 0 #fff, 0 50px 80px -52px rgb(59 38 23 / 0.5), 0 2px 5px rgb(59 38 23 / 0.06);
+}
+.kg-arak::before { content: ""; position: absolute; inset: 10px; border: 1px solid rgb(184 138 62 / 0.45); border-radius: 2px; pointer-events: none; }
+.kg-arak-znak { display: block; width: clamp(120px, 14vw, 156px); height: auto; margin: 0 auto clamp(26px, 3.4vw, 44px); }
+.kg-pravni { counter-reset: kg-tocka; }
+/* svaka točka: broj u margini, zlatna vlas iznad */
+.kg-pravni > section {
+  counter-increment: kg-tocka; display: grid; grid-template-columns: 62px minmax(0, 1fr); padding: clamp(26px, 3.2vw, 40px) 0;
+  background: linear-gradient(90deg, rgb(184 138 62 / 0), rgb(184 138 62 / 0.55) 12%, rgb(184 138 62 / 0.55) 88%, rgb(184 138 62 / 0)) 0 0 / 100% 1px no-repeat;
+}
+.kg-pravni > section::before { content: counter(kg-tocka, decimal-leading-zero); grid-row: 1 / span 6; padding-top: 0.92em; font-size: 12px; letter-spacing: 0.2em; font-weight: 600; color: var(--zlato-t); }
+.kg-pravni > section > * { grid-column: 2; }
+.kg-pravni h2 { font-size: clamp(27px, 2.7vw, 36px); line-height: 1.12; }
+.kg-pravni p, .kg-pravni ul { margin-top: 0.72em; max-width: 62ch; font-size: clamp(17px, 1.32vw, 18.5px); line-height: 1.76; color: #4b3726; }
+.kg-pravni a { color: var(--zlato-t); text-decoration: underline; text-decoration-color: rgb(184 138 62 / 0.55); text-decoration-thickness: 1px; text-underline-offset: 4px; transition: color 0.3s, text-decoration-color 0.3s; }
+.kg-pravni a:hover { color: var(--smeda); text-decoration-color: var(--zlato); }
+.kg-pravni ul { display: grid; gap: 7px; }
+.kg-pravni li { position: relative; padding-left: 30px; }
+.kg-pravni li::before { content: ""; position: absolute; left: 0; top: 0.4em; width: 18px; height: 18px; background: var(--kg-iskra) center / contain no-repeat; }
+.kg-arak .ornament { margin-top: clamp(14px, 2vw, 26px); }
+
+/* kraj stranice bez završnog poziva: kratak sumrak do noći podnožja (KrajDana.tsx) */
+.kg-kraj-dana {
+  position: relative; overflow: hidden; height: clamp(380px, 36vw, 520px); margin-bottom: -1px;
+  background: linear-gradient(180deg, var(--krem) 0, #f6d9a8 15%, #f0a56c 33%, #c9647a 52%, #6a4682 69%, #2b2f66 86%, #1c2248 100%);
+}
+.kg-kd-oblaci { top: 7%; height: 60%; opacity: 0.85; }
+.kg-kd-brda { position: absolute; left: 0; bottom: -1px; width: 100%; height: clamp(120px, 14vw, 210px); max-width: none; }
+
+@media (max-width: 1100px) {
+  /* knjiga i tekst u stupcu; korijenje postaje jedan korijen na kojem se nižu natpisi */
+  .kg-uvod { margin-bottom: 60px; }
+  .kg-kik { grid-template-columns: minmax(0, 1fr); }
+  .kg-kik .kg-tekst { order: -1; padding: 0 0 20px; position: relative; isolation: isolate; }
+  .kg-kik .kg-tekst::before { content: ""; position: absolute; z-index: -1; inset: -34px calc(var(--rub) * -1); background: linear-gradient(180deg, transparent, rgb(8 10 22 / 0.62) 64px, rgb(8 10 22 / 0.62) calc(100% - 64px), transparent); }
+  .kg-pozornica { max-width: 480px; margin: 0 auto; }
+  .kg-podzemlje::before { background: linear-gradient(180deg, rgb(255 214 150 / 0.55) 0, rgb(255 214 150 / 0) 1.5px), radial-gradient(ellipse 420px 120% at 44% 0, rgb(255 176 96 / 0.3), transparent 70%); }
+  .kg-kor-crtez { display: none; }
+  .kg-kor-malo { display: block; width: min(300px, 78%); height: auto; margin: 0 auto; overflow: visible; }
+  .kg-kor-naslov { position: static; max-width: 26ch; margin: 22px auto 0; text-align: center; font-size: 21px; }
+  .kg-kor-popis { display: grid; justify-items: center; }
+  .kg-kor-popis li { position: relative; left: auto; top: auto; width: auto; max-width: 27ch; padding-top: 62px; font-size: 19px; --d: 0s !important; }
+  .kg-kor-popis li::before { content: ""; position: absolute; left: 50%; top: 8px; width: 1.5px; height: 30px; margin-left: -0.75px; border-radius: 2px; background: linear-gradient(180deg, rgb(226 196 135 / 0.1), #e2c487); }
+  .kg-kor-popis li::after { content: ""; position: absolute; left: 50%; top: 34px; width: 19px; height: 19px; margin-left: -9.5px; background: #f3dba6; clip-path: var(--kg-zvijezda); }
+}
+
+@media (max-width: 900px) {
+  .kg-niti { grid-template-columns: minmax(0, 1fr); }
+  .kg-zvijezdje.siroko { display: none; }
+  .kg-zvijezdje.usko { display: block; width: min(100%, 430px); height: auto; margin: 0 auto; }
+  .kg-niti-knjiga { grid-column: 1; grid-row: 1; padding-top: 0; }
+  .kg-niti > .kg-tekst { grid-column: 1; grid-row: 2; padding: 56px 0 0; }
+  .kg-niti-okvir { margin-top: 30px; }
+  .kg-niti-okvir .k3d { --kw: 230px; --kd: 30px; }
+
+  .kg-pr-mreza, .kg-pr-dva { grid-template-columns: minmax(0, 1fr); }
+  .kg-pr-naslov { position: static; }
+  .kg-pr-uvod { background: radial-gradient(ellipse 90% 34% at 112% 38%, rgb(250 204 138 / 0.26), transparent 70%); }
+  .kg-vecer { max-width: 300px; }
+  .kg-vecer::before { inset: -14% -20% -12%; }
+  .kg-pravni > section { grid-template-columns: minmax(0, 1fr); }
+  .kg-pravni > section::before { grid-row: auto; padding: 0 0 10px; }
+  .kg-pravni > section > * { grid-column: 1; }
+}
+@media (max-width: 640px) {
+  .kg-list .obavijest-knjige .izbor b { font-size: 20px; }
+  .kg-vrpca { height: 70px; width: 20px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .kg-ptice { display: none; }
+  .kg-kor-crtez { clip-path: none; }
+  .kg-nit.jaka { opacity: 0.45; }
+}
+/* bez JavaScripta nema ulaska u ekran: korijenje je odmah naraslo */
+@media (scripting: none) {
+  .kg-kor-crtez { clip-path: none; }
+}
