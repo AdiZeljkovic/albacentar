@@ -136,13 +136,11 @@ export default function Jutro() {
           </p>
           <div className="proza" data-reveal style={kas(0.28)}>
             <p className="uvod">
-              Moj profesionalni i životni put oblikovali su različiti gradovi, kulture, obrazovanja i iskustva. Kroz
-              godine rada i života u međunarodnom okruženju razvijala sam interes za ljude, njihove životne priče,
-              odnose i načine na koje oblikuju vlastiti put.
+              Dugi niz godina radila sam u ekonomiji, u različitim zemljama i kulturama. Kroz sve to vrijeme najviše su me
+              zanimali ljudi: njihove priče, odnosi i način na koji pronalaze svoj put.
             </p>
             <p className="mut">
-              AlBa Centar nastao je kao prostor u kojem želim povezati svoja profesionalna iskustva, interes za ljudske
-              odnose, obiteljske korijene i osobni razvoj.
+              Taj me interes s vremenom doveo do obiteljskih konstelacija, kojima se danas posvećujem.
             </p>
           </div>
           <p className="om-potpis rukopis" data-reveal style={kas(0.36)}>

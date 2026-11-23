@@ -13,7 +13,9 @@ import { ISKRA } from "@/lib/zvijezda";
  * zasvijetli kad svjetlo stigne do nje. Sve je CSS i SVG, bez JavaScripta.
  */
 
-export type Postaja = { mjesto: string; opis: string };
+/** Prizor u niši: koji crtež ide uz postaju. */
+export type Prizor = "zagreb" | "daleko" | "prag" | "jezero" | "cilj";
+export type Postaja = { mjesto: string; opis: string; prizor: Prizor };
 
 const hash = (n: number) => {
   const x = Math.sin(n * 127.1 + 311.7) * 43758.5453;
@@ -23,65 +25,77 @@ const hash = (n: number) => {
 /* ---------- cesta (računalo): visina reda, točke postaja i krivulja kroz njih ---------- */
 type T = [number, number];
 const RED = 330;
-/** Postaje: sredine redova, naizmjence desno i lijevo od sredine crteža (širok je 1000). */
-const TOCKE: T[] = [
-  [710, 165],
-  [290, 495],
-  [710, 825],
-  [290, 1155],
-  [710, 1485],
-];
-/** Dionice između postaja (kubne krivulje); namjerno nisu zrcalne. */
-const DIONICE: Array<[T, T, T, T]> = [
-  [TOCKE[0], [724, 365], [264, 272], TOCKE[1]],
-  [TOCKE[1], [316, 710], [672, 612], TOCKE[2]],
-  [TOCKE[2], [742, 1022], [274, 952], TOCKE[3]],
-  [TOCKE[3], [306, 1360], [696, 1284], TOCKE[4]],
-];
-const CESTA = `M710 0 L710 165 ${DIONICE.map(([, b, c, d]) => `C${b.join(" ")} ${c.join(" ")} ${d.join(" ")}`).join(" ")}`;
-/** Na kojem je dijelu duljine ceste koja postaja (za usklađivanje svjetla i niša). */
-const UDIO = [0.066, 0.304, 0.533, 0.769, 1];
 const HOD = 16;
+/** Kontrolne točke dionica između postaja (kubne krivulje), po redu; namjerno nisu zrcalne. */
+const KONTROLE: Array<[T, T]> = [
+  [[724, 365], [264, 272]],
+  [[316, 710], [672, 612]],
+  [[742, 1022], [274, 952]],
+  [[306, 1360], [696, 1284]],
+];
 
 const naKrivulji = ([a, b, c, d]: [T, T, T, T], t: number): T => {
   const u = 1 - t;
   return [0, 1].map((k) => u * u * u * a[k] + 3 * u * u * t * b[k] + 3 * u * t * t * c[k] + t * t * t * d[k]) as T;
 };
+const duljina = (dionica: [T, T, T, T]) => {
+  let s = 0;
+  let prije = dionica[0];
+  for (let k = 1; k <= 40; k++) {
+    const sad = naKrivulji(dionica, k / 40);
+    s += Math.hypot(sad[0] - prije[0], sad[1] - prije[1]);
+    prije = sad;
+  }
+  return s;
+};
 
-/** Je li mjesto zauzeto nišom ili tekstom postaje (tamo se uz cestu ništa ne crta). */
-function zauzeto(x: number, y: number) {
-  return TOCKE.some(([px, py], i) => {
-    if (Math.abs(x - px) < 120 && Math.abs(y - py) < 176) return true;
-    const desno = i % 2 === 0;
-    const [od, doo] = desno ? [130, 600] : [400, 870];
-    return x > od && x < doo && Math.abs(y - py) < 112;
+/**
+ * Geometrija ceste za n postaja: postaje su sredine redova, naizmjence desno i lijevo; cesta ulazi
+ * odozgo, a za svaku postaju se zna na kojem je dijelu duljine ceste (da niša zasvijetli kad svjetlo stigne).
+ */
+function geometrija(n: number) {
+  const tocke: T[] = Array.from({ length: n }, (_, i) => [i % 2 ? 290 : 710, RED / 2 + i * RED]);
+  const dionice = tocke.slice(1).map((d, i) => {
+    const [b, c] = KONTROLE[i % KONTROLE.length];
+    const pomak = Math.floor(i / KONTROLE.length) * KONTROLE.length * RED;
+    return [tocke[i], [b[0], b[1] + pomak], [c[0], c[1] + pomak], d] as [T, T, T, T];
   });
-}
+  const cesta = `M710 0 L710 ${RED / 2} ${dionice.map(([, b, c, d]) => `C${b.join(" ")} ${c.join(" ")} ${d.join(" ")}`).join(" ")}`;
+  const duljine = [RED / 2, ...dionice.map(duljina)];
+  const ukupno = duljine.reduce((a, b) => a + b, 0);
+  const udio = duljine.map((_, i) => +(duljine.slice(0, i + 1).reduce((a, b) => a + b, 0) / ukupno).toFixed(3));
 
-/** Sitni znakovi uz cestu, kao na starim kartama: stabla, čempresi, busenje. Raspored je određen sjemenom. */
-const ZNAKOVI = (() => {
-  const izlaz: Array<{ x: number; y: number; vrsta: number; v: number }> = [];
-  let n = 0;
-  for (const dionica of DIONICE) {
+  /** Je li mjesto zauzeto nišom ili tekstom postaje (tamo se uz cestu ništa ne crta). */
+  const zauzeto = (x: number, y: number) =>
+    tocke.some(([px, py], i) => {
+      if (Math.abs(x - px) < 120 && Math.abs(y - py) < 176) return true;
+      const [od, doo] = i % 2 === 0 ? [130, 600] : [400, 870];
+      return x > od && x < doo && Math.abs(y - py) < 112;
+    });
+
+  /** Sitni znakovi uz cestu, kao na starim kartama: stabla, čempresi, busenje. Raspored je određen sjemenom. */
+  const znakovi: Array<{ x: number; y: number; vrsta: number; v: number }> = [];
+  let s = 0;
+  for (const dionica of dionice) {
     for (let k = 1; k < 15; k++) {
       const t = k / 15;
       const [x, y] = naKrivulji(dionica, t);
       const [x2, y2] = naKrivulji(dionica, t + 0.01);
       const d = Math.hypot(x2 - x, y2 - y) || 1;
       for (const strana of [-1, 1]) {
-        n++;
-        if (hash(n * 3.1) < 0.24) continue;
-        const od = 42 + hash(n * 7.7) * 60;
-        const px = x - ((y2 - y) / d) * od * strana + (hash(n * 1.3) - 0.5) * 16;
-        const py = y + ((x2 - x) / d) * od * strana + (hash(n * 2.9) - 0.5) * 16;
+        s++;
+        if (hash(s * 3.1) < 0.24) continue;
+        const od = 42 + hash(s * 7.7) * 60;
+        const px = x - ((y2 - y) / d) * od * strana + (hash(s * 1.3) - 0.5) * 16;
+        const py = y + ((x2 - x) / d) * od * strana + (hash(s * 2.9) - 0.5) * 16;
         if (zauzeto(px, py)) continue;
-        izlaz.push({ x: Math.round(px), y: Math.round(py), vrsta: Math.floor(hash(n * 5.3) * 4), v: +(1.05 + hash(n * 9.9) * 0.75).toFixed(2) });
+        znakovi.push({ x: Math.round(px), y: Math.round(py), vrsta: Math.floor(hash(s * 5.3) * 4), v: +(1.05 + hash(s * 9.9) * 0.75).toFixed(2) });
       }
     }
   }
-  return izlaz.sort((a, b) => a.y - b.y);
-})();
-
+  znakovi.sort((a, b) => a.y - b.y);
+  return { cesta, udio, znakovi };
+}
 const ZNAK = [
   // bjelogorica
   "M0 0 L0 -5 M-5 -6 C-7.5 -11 -3 -15.5 1 -13.5 C5.5 -15 8.5 -10 5.5 -6.4 C3 -4.2 -3 -4 -5 -6Z",
@@ -125,16 +139,16 @@ function Ruza() {
 }
 
 /** Svjetlo koje putuje cestom. */
-function Hod({ kasni }: { kasni: number }) {
+function Hod({ kasni, cesta }: { kasni: number; cesta: string }) {
   const stil = { "--d": `${kasni}s`, animationDuration: `${HOD}s` } as CSSProperties;
   return (
     <g>
       <g opacity=".34">
-        <path className="polje-kometa sjaj" pathLength={1} d={CESTA} style={stil} />
+        <path className="polje-kometa sjaj" pathLength={1} d={cesta} style={stil} />
       </g>
-      <path className="polje-kometa rep" pathLength={1} d={CESTA} style={stil} />
-      <path className="polje-kometa glava am-hod-rub" pathLength={1} d={CESTA} style={stil} />
-      <path className="polje-kometa glava" pathLength={1} d={CESTA} style={stil} />
+      <path className="polje-kometa rep" pathLength={1} d={cesta} style={stil} />
+      <path className="polje-kometa glava am-hod-rub" pathLength={1} d={cesta} style={stil} />
+      <path className="polje-kometa glava" pathLength={1} d={cesta} style={stil} />
     </g>
   );
 }
@@ -410,9 +424,10 @@ function Cilj() {
   );
 }
 
-const PRIZORI = [Zagreb, Melbourne, Prag, Garda, Cilj];
+const PRIZORI = { zagreb: Zagreb, daleko: Melbourne, prag: Prag, jezero: Garda, cilj: Cilj };
 
 export default function Putovanje({ oznaka, naslov, postaje }: { oznaka: string; naslov: string; postaje: readonly Postaja[] }) {
+  const { cesta, udio, znakovi } = geometrija(postaje.length);
   return (
     <section className="am-put zrno">
       {/* vedro jutro nakon svitanja: sunce je više, nebom plove oblaci i ptice */}
@@ -467,23 +482,23 @@ export default function Putovanje({ oznaka, naslov, postaje }: { oznaka: string;
           </header>
         </div>
 
-        <div className="am-put-tok" data-reveal="crta" style={vars({ "--red": `${RED}px`, "--hod": `${HOD}s` })}>
+        <div className="am-put-tok" data-reveal="crta" style={vars({ "--red": `${RED}px`, "--hod": `${HOD}s`, "--n": postaje.length })}>
           {/* cesta na širokim ekranima */}
           <Ruza />
           <svg className="am-cesta" viewBox={`0 0 1000 ${RED * postaje.length}`} aria-hidden="true">
             <g fill="none">
-              <path d={CESTA} stroke="#c9a35c" strokeOpacity=".7" strokeWidth="25" />
-              <path d={CESTA} stroke="#fdf6e8" strokeWidth="22" />
-              <path d={CESTA} stroke="#b88a3e" strokeOpacity=".55" strokeWidth="1.3" strokeDasharray="3 9" />
-              <path className="am-cesta-zlato" d={CESTA} pathLength={1} stroke="#c9973f" strokeWidth="2.2" />
+              <path d={cesta} stroke="#c9a35c" strokeOpacity=".7" strokeWidth="25" />
+              <path d={cesta} stroke="#fdf6e8" strokeWidth="22" />
+              <path d={cesta} stroke="#b88a3e" strokeOpacity=".55" strokeWidth="1.3" strokeDasharray="3 9" />
+              <path className="am-cesta-zlato" d={cesta} pathLength={1} stroke="#c9973f" strokeWidth="2.2" />
             </g>
             <g className="am-znakovi" fill="#f6ead4" stroke="#a47b3f" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round">
-              {ZNAKOVI.map((z, i) => (
+              {znakovi.map((z, i) => (
                 <path key={i} d={ZNAK[z.vrsta]} transform={`translate(${z.x} ${z.y}) scale(${z.v})`} />
               ))}
             </g>
             <g className="am-cesta-svjetlo" fill="none" strokeLinecap="round">
-              <Hod kasni={0} />
+              <Hod kasni={0} cesta={cesta} />
             </g>
           </svg>
           {/* staza na uskim ekranima */}
@@ -491,13 +506,13 @@ export default function Putovanje({ oznaka, naslov, postaje }: { oznaka: string;
 
           <ol className="am-postaje">
             {postaje.map((p, i) => {
-              const Prizor = PRIZORI[i % PRIZORI.length];
+              const Prizor = PRIZORI[p.prizor];
               const zadnja = i === postaje.length - 1;
               return (
                 <li
                   key={p.mjesto}
                   className={cx("am-postaja", i % 2 ? "lijevo" : "desno", zadnja && "cilj")}
-                  style={vars({ "--t": `${(UDIO[i] ?? 1) * HOD}s`, "--tm": `${((i + 0.5) / postaje.length) * HOD}s` })}
+                  style={vars({ "--t": `${(udio[i] ?? 1) * HOD}s`, "--tm": `${((i + 0.5) / postaje.length) * HOD}s` })}
                 >
                   <Nisa
                     id={`am-n${i}`}

@@ -36,7 +36,7 @@ export const site: Site = {
   owner: {
     name: "Aleksandra Baljak Biško",
     prefix: "MSc.",
-    roles: ["Magistar ekonomskih znanosti", "Porezna specijalist", "Konstelator"],
+    roles: ["Konstelator"],
     // Putanja do fotografije u /public (npr. "/img/aleksandra.jpg"). Dok je prazno, prikazuje se znak drveta.
     photo: "",
   },
