@@ -1,0 +1,892 @@
+<!doctype html>
+<html lang="hr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>AlBa Centar · plan objava · prosinac 2026.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..600;1,400..600&family=Figtree:wght@400..600&family=Great+Vibes&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --noc: #19213b; --noc-2: #10162b; --noc-3: #080a16; --noc-plava: #2b3670;
+    --zlato: #b88a3e; --zlato-t: #84601d; --zlato-s: #d9b56f; --zlato-j: #e2c487;
+    --krem: #faf2e7; --pijesak: #f1e4d0; --papir: #fffaf1; --smeda: #3b2617; --mut: #6b5848;
+    --kadulja: #5b6b4a; --ruz: #b46a5a;
+    --linija: rgb(184 138 62 / 0.28);
+    --serif: "EB Garamond", Garamond, "Times New Roman", serif;
+    --sans: "Figtree", system-ui, "Segoe UI", Arial, sans-serif;
+    --rukopis: "Great Vibes", cursive;
+    --sirina: 1180px;
+    --iskra: polygon(50% 0, 58% 42%, 100% 50%, 58% 58%, 50% 100%, 42% 58%, 0 50%, 42% 42%);
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: var(--krem); color: var(--smeda); font-family: var(--sans); font-size: 16.5px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+  h1, h2, h3, h4 { font-family: var(--serif); font-weight: 400; line-height: 1.08; letter-spacing: -0.01em; margin: 0; text-wrap: balance; }
+  p { margin: 0; }
+  em.z { font-style: italic; color: var(--zlato-t); }
+  .w { width: 100%; max-width: calc(var(--sirina) + 48px); margin: 0 auto; padding: 0 24px; }
+  .oz { display: flex; align-items: center; gap: 12px; font-size: 11.5px; font-weight: 600; letter-spacing: 0.24em; text-transform: uppercase; color: var(--zlato-t); }
+  .oz::before { content: ""; width: 9px; height: 9px; background: currentColor; clip-path: var(--iskra); }
+  .mut { color: var(--mut); }
+  a { color: inherit; }
+
+  /* ---------- glava: noćno nebo s astrolabom ---------- */
+  .glava { position: relative; overflow: hidden; color: #f6ead2; padding: 72px 0 150px;
+    background:
+      radial-gradient(ellipse 45% 55% at 82% 38%, rgb(217 181 111 / 0.14), transparent 70%),
+      radial-gradient(ellipse 60% 45% at 18% 30%, rgb(84 80 170 / 0.3), transparent 70%),
+      linear-gradient(180deg, #0b0f22 0%, #141b38 55%, #232d62 100%); }
+  .glava canvas { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+  .glava .oz { color: var(--zlato-s); }
+  .glava h1 { margin-top: 22px; font-size: clamp(44px, 6.4vw, 86px); color: #fffaf0; }
+  .glava h1 em { font-style: italic; color: var(--zlato-s); }
+  .glava-pod { margin-top: 10px; font-family: var(--rukopis); font-size: clamp(28px, 3vw, 40px); color: var(--zlato-j); }
+  .glava-uvod { margin-top: 22px; max-width: 640px; font-size: 18px; color: #d8ccb5; }
+  .glava-meta { margin-top: 30px; display: flex; flex-wrap: wrap; gap: 10px; }
+  .glava-meta span { padding: 7px 14px; border: 1px solid rgb(226 196 135 / 0.45); border-radius: 999px; font-size: 13px; color: var(--zlato-j); background: rgb(10 14 32 / 0.4); }
+  .astrolab { position: absolute; right: max(-120px, calc((100vw - var(--sirina)) / 2 - 140px)); top: 50%; width: min(520px, 46vw); translate: 0 -54%; opacity: 0.9; pointer-events: none; }
+  .astrolab .vrti { transform-origin: 280px 280px; animation: vrti 160s linear infinite; }
+  @keyframes vrti { to { transform: rotate(360deg); } }
+  .glava-kraj { position: absolute; left: 0; right: 0; bottom: -1px; height: 120px; display: block; width: 100%; }
+
+  /* ---------- sekcije ---------- */
+  section.s { padding: 84px 0; position: relative; }
+  section.s.pijesak { background: linear-gradient(180deg, var(--krem), var(--pijesak) 12%, var(--pijesak) 88%, var(--krem)); }
+  .s-glava { max-width: 760px; margin-bottom: 40px; }
+  .s-glava h2 { margin-top: 14px; font-size: clamp(34px, 4.2vw, 54px); }
+  .s-glava h2 em { font-style: italic; color: var(--zlato-t); }
+  .s-glava p { margin-top: 16px; font-size: 17.5px; color: var(--mut); }
+
+  .papir { position: relative; background: linear-gradient(180deg, #fffcf6, var(--papir)); border: 1px solid var(--linija); border-radius: 14px; padding: 26px 28px; box-shadow: 0 24px 50px -36px rgb(59 38 23 / 0.45); }
+  .papir::before { content: ""; position: absolute; inset: 6px; border: 1px solid rgb(184 138 62 / 0.16); border-radius: 10px; pointer-events: none; }
+
+  .mreza { display: grid; gap: 18px; }
+  .m2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .m3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .m4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  @media (max-width: 960px) { .m3, .m4 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 640px) { .m2, .m3, .m4 { grid-template-columns: 1fr; } }
+
+  .odluka h3 { font-size: 25px; margin: 6px 0 10px; }
+  .odluka .br { font-family: var(--serif); font-style: italic; font-size: 20px; color: var(--zlato); }
+  .odluka p { font-size: 15.5px; color: var(--mut); }
+
+  /* stupovi sadržaja */
+  .stup { display: grid; gap: 10px; }
+  .stup-traka { height: 6px; border-radius: 6px; background: rgb(184 138 62 / 0.16); overflow: hidden; }
+  .stup-traka i { display: block; height: 100%; background: linear-gradient(90deg, var(--zlato), var(--zlato-j)); border-radius: inherit; }
+  .stup h3 { font-size: 26px; display: flex; justify-content: space-between; align-items: baseline; gap: 10px; }
+  .stup h3 small { font-family: var(--sans); font-size: 13px; font-weight: 600; color: var(--zlato-t); letter-spacing: 0.08em; }
+  .stup ul { margin: 4px 0 0; padding: 0; list-style: none; display: grid; gap: 6px; font-size: 15px; color: var(--mut); }
+  .stup li { display: grid; grid-template-columns: 12px 1fr; gap: 10px; }
+  .stup li::before { content: ""; width: 9px; height: 9px; margin-top: 7px; background: var(--zlato); clip-path: var(--iskra); }
+
+  /* tablice */
+  table { width: 100%; border-collapse: collapse; font-size: 15px; }
+  th, td { text-align: left; padding: 12px 14px; border-bottom: 1px dashed rgb(184 138 62 / 0.35); vertical-align: top; }
+  th { font-size: 11.5px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--zlato-t); font-weight: 600; border-bottom: 1px solid var(--linija); }
+  tr:last-child td { border-bottom: 0; }
+  td strong { font-weight: 600; }
+  .tablica-omot { overflow-x: auto; }
+
+  /* oznake formata */
+  .f { display: inline-flex; align-items: center; gap: 6px; padding: 3px 10px 3px 8px; border-radius: 999px; font-size: 11.5px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; white-space: nowrap; line-height: 1.5; }
+  .f svg { width: 12px; height: 12px; flex: none; }
+  .f-reel { background: var(--noc); color: var(--zlato-j); }
+  .f-slika { background: #fff; color: var(--zlato-t); box-shadow: inset 0 0 0 1px rgb(184 138 62 / 0.55); }
+  .f-karusel { background: #e9eddf; color: #46553a; box-shadow: inset 0 0 0 1px rgb(91 107 74 / 0.4); }
+  .f-story { background: transparent; color: var(--mut); box-shadow: inset 0 0 0 1px rgb(107 88 72 / 0.4); }
+  .f-dogadaj { background: #f6e3dc; color: #8e4a3c; box-shadow: inset 0 0 0 1px rgb(180 106 90 / 0.45); }
+
+  /* ---------- kalendar ---------- */
+  .filteri { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 22px; }
+  .filteri button { font: inherit; font-size: 13.5px; font-weight: 500; padding: 8px 16px; border-radius: 999px; border: 1px solid rgb(184 138 62 / 0.45); background: #fffaf1; color: var(--smeda); cursor: pointer; transition: background 0.25s, color 0.25s; }
+  .filteri button[aria-pressed="true"] { background: var(--noc); color: var(--zlato-j); border-color: var(--noc); }
+  .kalendar { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 8px; }
+  .kal-dan-ime { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; font-weight: 600; color: var(--zlato-t); text-align: center; padding-bottom: 6px; }
+  .kal { position: relative; min-height: 148px; padding: 10px 10px 12px; border-radius: 12px; background: #fffaf1; border: 1px solid rgb(184 138 62 / 0.22); display: flex; flex-direction: column; gap: 6px; }
+  .kal.prazno { background: transparent; border-style: dashed; border-color: rgb(184 138 62 / 0.14); }
+  .kal.vikend { background: #fbf4e8; }
+  .kal.blagdan { background: linear-gradient(180deg, #1c2448, #121834); border-color: #1c2448; color: #f6ead2; }
+  .kal.blagdan .kal-br { color: var(--zlato-j); }
+  .kal.blagdan .kal-oznaka { color: var(--zlato-j); }
+  .kal-br { font-family: var(--serif); font-size: 26px; line-height: 1; color: var(--smeda); display: flex; justify-content: space-between; align-items: baseline; }
+  .kal-br small { font-family: var(--sans); font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--mut); font-weight: 600; }
+  .kal.blagdan .kal-br small { color: #b9ae9a; }
+  .kal-oznaka { font-size: 11.5px; line-height: 1.3; color: var(--ruz); font-weight: 600; }
+  .kal a.stavka { display: grid; gap: 4px; text-decoration: none; padding: 7px 8px; border-radius: 8px; background: rgb(255 255 255 / 0.65); border: 1px solid rgb(184 138 62 / 0.18); transition: transform 0.25s, box-shadow 0.25s; }
+  .kal.blagdan a.stavka { background: rgb(255 255 255 / 0.06); border-color: rgb(226 196 135 / 0.25); }
+  .kal a.stavka:hover { transform: translateY(-2px); box-shadow: 0 10px 20px -14px rgb(59 38 23 / 0.6); }
+  .stavka-red { display: flex; align-items: center; justify-content: space-between; gap: 6px; }
+  .stavka-vrijeme { font-size: 12px; font-weight: 600; color: var(--mut); font-variant-numeric: tabular-nums; }
+  .kal.blagdan .stavka-vrijeme { color: #cbbfa8; }
+  .stavka-naslov { font-family: var(--serif); font-size: 15.5px; line-height: 1.18; color: var(--smeda); }
+  .kal.blagdan .stavka-naslov { color: #fffaf0; }
+  .stavka.skriveno { display: none; }
+  .legenda { display: flex; flex-wrap: wrap; gap: 10px 18px; margin-top: 20px; font-size: 13.5px; color: var(--mut); align-items: center; }
+  @media (max-width: 900px) {
+    .kalendar { grid-template-columns: 1fr; }
+    .kal-dan-ime, .kal.prazno { display: none; }
+    .kal { min-height: 0; }
+    .kal-br { font-size: 22px; }
+  }
+
+  /* ---------- objave ---------- */
+  .tjedan { margin-top: 56px; }
+  .tjedan:first-of-type { margin-top: 0; }
+  .tjedan-glava { display: flex; align-items: baseline; gap: 18px; flex-wrap: wrap; margin-bottom: 20px; padding-bottom: 14px; border-bottom: 1px solid var(--linija); }
+  .tjedan-glava h3 { font-size: 32px; }
+  .tjedan-glava p { color: var(--mut); font-size: 15.5px; }
+  .objave { display: grid; gap: 18px; }
+  .objava { scroll-margin-top: 24px; display: grid; grid-template-columns: 150px 1fr; gap: 26px; }
+  .objava:target { box-shadow: 0 0 0 2px var(--zlato-s), 0 24px 50px -36px rgb(59 38 23 / 0.45); }
+  .objava-datum { display: grid; align-content: start; gap: 8px; }
+  .objava-datum .dan { font-family: var(--serif); font-size: 46px; line-height: 0.9; color: var(--zlato-t); }
+  .objava-datum .dan small { font-size: 18px; }
+  .objava-datum .tj { font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 600; color: var(--mut); }
+  .objava-datum .vr { font-size: 14px; font-weight: 600; }
+  .objava h4 { font-size: 27px; }
+  .objava-meta { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+  .objava-meta .stup-oznaka { font-size: 12.5px; color: var(--mut); padding: 3px 10px; border-radius: 999px; background: rgb(184 138 62 / 0.1); }
+  .polja { display: grid; grid-template-columns: 130px 1fr; gap: 10px 18px; margin-top: 18px; font-size: 15px; }
+  .polja dt { font-size: 11.5px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--zlato-t); font-weight: 600; padding-top: 3px; }
+  .polja dd { margin: 0; }
+  .opis { position: relative; margin-top: 18px; padding: 18px 20px 16px; border-radius: 10px; background: #fff; border: 1px solid rgb(184 138 62 / 0.25); white-space: pre-line; font-size: 15.5px; }
+  .opis-oznaka { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; font-size: 11.5px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--zlato-t); font-weight: 600; white-space: normal; }
+  .kopiraj { font: inherit; font-size: 12px; letter-spacing: 0.04em; text-transform: none; padding: 4px 12px; border-radius: 999px; border: 1px solid rgb(184 138 62 / 0.45); background: #fffaf1; color: var(--smeda); cursor: pointer; }
+  .kopiraj[data-gotovo] { background: var(--kadulja); color: #fff; border-color: var(--kadulja); }
+  .scenarij { margin-top: 18px; border-radius: 10px; overflow: hidden; border: 1px solid #222a4d; }
+  .scenarij table { font-size: 14.5px; background: var(--noc); color: #e9dfca; }
+  .scenarij th { color: var(--zlato-j); border-bottom-color: rgb(226 196 135 / 0.3); background: #141b34; }
+  .scenarij td { border-bottom-color: rgb(226 196 135 / 0.16); }
+  .scenarij td:first-child { white-space: nowrap; color: var(--zlato-j); font-variant-numeric: tabular-nums; width: 76px; }
+  .scenarij td:last-child { font-family: var(--serif); font-size: 16.5px; color: #fffaf0; }
+  .napomena { margin-top: 14px; font-size: 14px; color: var(--ruz); display: flex; gap: 10px; }
+  .napomena::before { content: ""; flex: none; width: 10px; height: 10px; margin-top: 6px; background: currentColor; clip-path: var(--iskra); }
+  @media (max-width: 760px) {
+    .objava { grid-template-columns: 1fr; gap: 12px; }
+    .objava-datum { grid-template-columns: auto auto 1fr; align-items: baseline; gap: 12px; }
+    .polja { grid-template-columns: 1fr; gap: 2px; }
+    .polja dd { margin-bottom: 10px; }
+  }
+
+  /* kontrolni popisi */
+  .popis { margin: 0; padding: 0; list-style: none; display: grid; gap: 10px; }
+  .popis li { display: grid; grid-template-columns: 22px 1fr; gap: 10px; font-size: 15.5px; }
+  .popis input { width: 17px; height: 17px; margin-top: 3px; accent-color: var(--zlato); }
+  .popis label { cursor: pointer; }
+  .popis b { font-weight: 600; }
+
+  /* ---------- rast: noćna ploča ---------- */
+  .rast { background: linear-gradient(180deg, var(--krem), #1a2142 9%, var(--noc-2) 22%, var(--noc-2) 100%); color: #e9dfca; padding-top: 150px; }
+  .rast .s-glava p { color: #c9bda6; }
+  .rast .oz { color: var(--zlato-s); }
+  .rast h2 { color: #fffaf0; }
+  .rast .s-glava h2 em { color: var(--zlato-s); }
+  .scenariji { display: grid; gap: 16px; }
+  .scen { display: grid; grid-template-columns: 220px 1fr 170px; gap: 22px; align-items: center; padding: 22px 24px; border-radius: 14px; background: rgb(255 255 255 / 0.04); border: 1px solid rgb(226 196 135 / 0.2); }
+  .scen.istaknut { border-color: rgb(226 196 135 / 0.6); background: linear-gradient(180deg, rgb(226 196 135 / 0.1), rgb(226 196 135 / 0.03)); }
+  .scen h3 { font-size: 24px; color: #fffaf0; }
+  .scen h3 small { display: block; margin-top: 4px; font-family: var(--sans); font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--zlato-s); font-weight: 600; }
+  .scen p { font-size: 14.5px; color: #c9bda6; }
+  .scen-broj { text-align: right; font-family: var(--serif); font-size: 36px; line-height: 1; color: var(--zlato-j); }
+  .scen-broj small { display: block; margin-top: 6px; font-family: var(--sans); font-size: 12px; color: #a99d88; }
+  .scen-traka { grid-column: 1 / -1; position: relative; height: 10px; border-radius: 10px; background: rgb(255 255 255 / 0.06); }
+  .scen-traka i { position: absolute; top: 0; bottom: 0; border-radius: 10px; background: linear-gradient(90deg, rgb(217 181 111 / 0.55), var(--zlato-j)); }
+  .scen-traka b { position: absolute; top: -4px; width: 2px; height: 18px; background: #fffaf0; border-radius: 2px; }
+  .os { display: flex; justify-content: space-between; font-size: 12px; color: #8f846f; margin-top: 8px; padding: 0 24px; }
+  @media (max-width: 760px) { .os { display: none; } }
+  @media (max-width: 760px) { .scen { grid-template-columns: 1fr; gap: 10px; } .scen-broj { text-align: left; } }
+  .rast table { color: #e9dfca; }
+  .rast th { color: var(--zlato-s); border-bottom-color: rgb(226 196 135 / 0.3); }
+  .rast td { border-bottom-color: rgb(226 196 135 / 0.16); }
+  .rast .papir { background: rgb(255 255 255 / 0.04); border-color: rgb(226 196 135 / 0.22); box-shadow: none; }
+  .rast .papir::before { border-color: rgb(226 196 135 / 0.1); }
+  .rast .mut { color: #b4a891; }
+  .izvori { margin-top: 40px; font-size: 13.5px; color: #a99d88; }
+  .izvori a { color: var(--zlato-j); }
+  .izvori ul { margin: 10px 0 0; padding-left: 18px; display: grid; gap: 4px; }
+
+  footer { background: var(--noc-2); color: #8f846f; text-align: center; padding: 30px 0 46px; font-size: 13px; border-top: 1px solid rgb(226 196 135 / 0.12); }
+  footer .rukopis { font-family: var(--rukopis); font-size: 30px; color: var(--zlato-j); display: block; margin-bottom: 6px; }
+
+  @media print {
+    .glava canvas, .astrolab, .filteri, .kopiraj { display: none !important; }
+    .glava { padding: 30px 0 40px; }
+    .glava-kraj { display: none; }
+    section.s { padding: 30px 0; break-inside: avoid-page; }
+    .objava { break-inside: avoid; }
+    .rast { background: #fff; color: var(--smeda); padding-top: 30px; }
+    .rast * { color: var(--smeda) !important; }
+  }
+  @media (prefers-reduced-motion: reduce) { .astrolab .vrti { animation: none; } }
+</style>
+</head>
+<body>
+
+<!-- ====================== GLAVA ====================== -->
+<header class="glava">
+  <canvas id="nebo" aria-hidden="true"></canvas>
+  <svg class="astrolab" viewBox="0 0 560 560" fill="none" aria-hidden="true">
+    <defs>
+      <radialGradient id="sjaj"><stop offset="0" stop-color="#f3d391" stop-opacity=".35"/><stop offset="1" stop-color="#f3d391" stop-opacity="0"/></radialGradient>
+    </defs>
+    <circle cx="280" cy="280" r="170" fill="url(#sjaj)"/>
+    <circle cx="280" cy="280" r="262" stroke="#d9b56f" stroke-width="1.4" opacity=".8"/>
+    <circle cx="280" cy="280" r="256" stroke="#d9b56f" stroke-width=".5" opacity=".4"/>
+    <g class="vrti" stroke="#e2c487" stroke-linecap="round" id="podjela"></g>
+    <g stroke="#e9cd92" stroke-width=".9" opacity=".7">
+      <path d="M166 120 L150 214 L204 292 L286 372 M318 92 L330 186 L362 282 L286 372 L232 446 M286 372 L338 452 M150 214 L240 178 M330 186 L418 222 L362 282 M204 292 L362 282" />
+    </g>
+    <g fill="#fff6dc" id="zvijezde-astrolaba"></g>
+  </svg>
+  <div class="w" style="position:relative">
+    <p class="oz">Plan društvenih mreža · Facebook</p>
+    <h1>Prosinac na stranici<br><em>AlBa konstelacije.</em></h1>
+    <p class="glava-uvod">Plan objava za prosinac 2026.: kalendar, tekstovi za svaku objavu, scenariji za reelse i očekivanja rasta stranice.</p>
+    <div class="glava-meta">
+      <span>24 objave</span>
+      <span>8 reelsa</span>
+      <span>5 objava tjedno + storiji</span>
+      <span>stvarne fotografije</span>
+      <span>danas: 11 pratitelja</span>
+    </div>
+  </div>
+  <svg class="glava-kraj" viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true">
+    <defs><linearGradient id="gk" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#faf2e7" stop-opacity="0"/><stop offset=".7" stop-color="#faf2e7" stop-opacity=".85"/><stop offset="1" stop-color="#faf2e7"/></linearGradient></defs>
+    <path d="M0 58 C180 40 330 30 520 44 C700 58 820 34 1000 30 C1180 26 1300 46 1440 40 L1440 120 L0 120Z" fill="#1d2550" opacity=".7"/>
+    <path d="M0 78 C220 66 420 58 640 70 C860 82 1050 60 1240 62 C1340 63 1400 70 1440 72 L1440 120 L0 120Z" fill="#11162e"/>
+    <rect y="40" width="1440" height="80" fill="url(#gk)"/>
+  </svg>
+</header>
+
+<!-- ====================== UKRATKO ====================== -->
+<section class="s">
+  <div class="w">
+    <div class="s-glava">
+      <p class="oz">Ukratko</p>
+      <h2>Kako smo složili <em>prosinac.</em></h2>
+      <p>Stranica trenutno ima 11 pratitelja. Zato je cilj prosinca skupiti prvu stotinu ljudi koje ove teme stvarno zanimaju i pripremiti teren za siječanj, kada se ljudi najčešće odlučuju na promjene.</p>
+    </div>
+    <div class="mreza m3">
+      <article class="papir odluka"><span class="br">1.</span><h3>Stvarne fotografije i snimke</h3><p>Sve objave koriste vlastite fotografije i snimke, prizore s web-stranice i stare slike u javnom vlasništvu (uz potpis djela). Facebook od 2025. smanjuje doseg sadržaja koji nije originalan, a ljudi lakše vjeruju stvarnim slikama.</p></article>
+      <article class="papir odluka"><span class="br">2.</span><h3>Pet objava tjedno</h3><p>Dva reelsa i tri slike ili karusela, uz storije. Subotom samo storiji, jer je subota u svim istraživanjima najslabiji dan. Od 25. do 27. prosinca pauza.</p></article>
+      <article class="papir odluka"><span class="br">3.</span><h3>Teme mjeseca</h3><p>Advent (svake nedjelje jedna svijeća), blagdani i obitelj (stol, stare svađe, oni kojih više nema) i dvije radionice, uz najavu prve radionice u siječnju.</p></article>
+      <article class="papir odluka"><span class="br">4.</span><h3>Više povjerenja, manje prodaje</h3><p>Samo 4 od 24 objave izravno pozivaju na radionicu. Ostale objašnjavaju kako konstelacije izgledaju i o čemu se na njima radi, jer ljudi dolaze tek kad im je jasno što ih čeka.</p></article>
+      <article class="papir odluka"><span class="br">5.</span><h3>Provjera nakon dva tjedna</h3><p>14. prosinca gledamo statistiku stranice: koje objave ljudi čitaju, u koje sate reagiraju i odakle dolaze novi pratitelji. Prema tome pomičemo termine za ostatak mjeseca.</p></article>
+      <article class="papir odluka"><span class="br">6.</span><h3>Tekstovi su prijedlog</h3><p>Svi opisi objava napisani su u prvom licu, kao da ih piše Aleksandra. Prije objave ih pročita i promijeni sve što ne zvuči kao ona.</p></article>
+    </div>
+  </div>
+</section>
+
+<!-- ====================== STRATEGIJA ====================== -->
+<section class="s pijesak">
+  <div class="w">
+    <div class="s-glava">
+      <p class="oz">Strategija</p>
+      <h2>Četiri vrste <em>objava.</em></h2>
+      <p>Svaka objava spada u jednu od četiri skupine. Ovaj omjer drži stranicu korisnom, a ne prodajnom.</p>
+    </div>
+    <div class="mreza m4">
+      <div class="papir stup"><h3>Razumjeti <small>35 %</small></h3><div class="stup-traka"><i style="width:35%"></i></div><ul><li>što su konstelacije, ukratko</li><li>tri Hellingerova načela</li><li>česta pitanja i strahovi</li><li>tekstovi s bloga</li></ul></div>
+      <div class="papir stup"><h3>Zastati <small>35 %</small></h3><div class="stup-traka"><i style="width:35%"></i></div><ul><li>misao tjedna</li><li>adventske svijeće</li><li>pitanja za tihu večer</li><li>solsticij, blagdani, kraj godine</li></ul></div>
+      <div class="papir stup"><h3>Pridružiti se <small>20 %</small></h3><div class="stup-traka"><i style="width:20%"></i></div><ul><li>najave radionica</li><li>Facebook događaji</li><li>poziv na poruku</li><li>siječanjska radionica</li></ul></div>
+      <div class="papir stup"><h3>Iza scene <small>10 %</small></h3><div class="stup-traka"><i style="width:10%"></i></div><ul><li>prostor pripremljen za krug</li><li>figure, svijeća, bilježnica</li><li>knjige u pripremi</li><li>nikad sudionici</li></ul></div>
+    </div>
+
+    <div class="mreza m2" style="margin-top:22px">
+      <div class="papir">
+        <p class="oz">Formati</p>
+        <div class="tablica-omot" style="margin-top:14px">
+          <table>
+            <thead><tr><th>Format</th><th>Mjere</th><th>Pravilo</th></tr></thead>
+            <tbody>
+              <tr><td><span class="f f-reel" data-ikona="reel">Reel</span></td><td>9:16 · 1080×1920</td><td>20–35 s. Udica u prve 3 sekunde, tekst na ekranu, titlovi uvijek (većina gleda bez zvuka), mirna glazba iz Facebookove knjižnice.</td></tr>
+              <tr><td><span class="f f-slika" data-ikona="slika">Slika</span></td><td>4:5 · 1080×1350</td><td>Stvarna fotografija ili predložak u stilu stranice. Najviše 12 riječi na slici.</td></tr>
+              <tr><td><span class="f f-karusel" data-ikona="karusel">Karusel</span></td><td>4:5 · 1080×1350</td><td>4–6 slajdova, prvi slajd je pitanje ili obećanje, zadnji poziv.</td></tr>
+              <tr><td><span class="f f-story" data-ikona="story">Story</span></td><td>9:16</td><td>1–3 dnevno kad ima smisla: podijeljena objava, anketa, iza scene.</td></tr>
+              <tr><td><span class="f f-dogadaj" data-ikona="dogadaj">Događaj</span></td><td>1920×1005</td><td>Za svaku radionicu poseban Facebook događaj; ljudi dobiju podsjetnik.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="papir">
+        <p class="oz">Kada objavljivati</p>
+        <div class="tablica-omot" style="margin-top:14px">
+          <table>
+            <thead><tr><th>Dan</th><th>Vrijeme</th><th>Što</th></tr></thead>
+            <tbody>
+              <tr><td><b>Ponedjeljak</b></td><td>08:30</td><td>Misao tjedna (slika)</td></tr>
+              <tr><td><b>Utorak</b></td><td>09:00 ili 20:00</td><td>Karusel ujutro ili reel navečer</td></tr>
+              <tr><td><b>Srijeda</b></td><td>20:00</td><td>Reel</td></tr>
+              <tr><td><b>Četvrtak</b></td><td>09:00</td><td>Edukativna objava ili tekst s bloga</td></tr>
+              <tr><td><b>Petak</b></td><td>09:00</td><td>Karusel ili najava</td></tr>
+              <tr><td><b>Subota</b></td><td>–</td><td>Samo storiji</td></tr>
+              <tr><td><b>Nedjelja</b></td><td>18:00</td><td>Adventski reel (svijeća)</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="mut" style="margin-top:14px;font-size:14px">Slike i karusele objavljujemo radnim danom ujutro, jer istraživanja redovito izdvajaju jutra sredinom tjedna (četvrtak oko 9 sati). Reelse navečer, kad ljudi gledaju video na miru. Subota je u istraživanjima najslabiji dan. Vremena su po našem vremenu i provjeravamo ih 14. prosinca.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====================== KALENDAR ====================== -->
+<section class="s" id="kalendar">
+  <div class="w">
+    <div class="s-glava">
+      <p class="oz">Kalendar</p>
+      <h2>Prosinac 2026., <em>dan po dan.</em></h2>
+      <p>Klik na objavu vodi do njezina teksta i opisa vizuala. Tamna polja su blagdani i adventske nedjelje.</p>
+    </div>
+    <div class="filteri" role="group" aria-label="Prikaži formate">
+      <button type="button" data-filter="sve" aria-pressed="true">Sve</button>
+      <button type="button" data-filter="reel" aria-pressed="false">Reelsi</button>
+      <button type="button" data-filter="slika" aria-pressed="false">Slike</button>
+      <button type="button" data-filter="karusel" aria-pressed="false">Karuseli</button>
+      <button type="button" data-filter="story" aria-pressed="false">Storiji</button>
+      <button type="button" data-filter="dogadaj" aria-pressed="false">Događaji</button>
+    </div>
+    <div class="kalendar" id="kal"></div>
+    <div class="legenda" id="legenda"></div>
+  </div>
+</section>
+
+<!-- ====================== OBJAVE ====================== -->
+<section class="s pijesak" id="objave">
+  <div class="w">
+    <div class="s-glava">
+      <p class="oz">Objave</p>
+      <h2>Objave i <em>tekstovi.</em></h2>
+      <p>Uz svaku objavu: čemu služi, što treba snimiti ili dizajnirati, tekst na slici i opis koji se može kopirati. Za reelse i scenarij po sekundama. Tekstovi su prijedlog i Aleksandra ih prije objave prilagodi svom načinu pisanja.</p>
+    </div>
+    <div id="tjedni"></div>
+  </div>
+</section>
+
+<!-- ====================== RAST ====================== -->
+<section class="s rast" id="rast">
+  <div class="w">
+    <div class="s-glava">
+      <p class="oz">Očekivanja</p>
+      <h2>Koliko stranica može <em>narasti u prosincu.</em></h2>
+      <p>Stranica danas ima 11 pratitelja. Kod tako male stranice postoci ne znače puno, pa su očekivanja u stvarnim brojevima. Novi pratitelji dolaze uglavnom preko reelsa koje Facebook pokazuje ljudima izvan stranice, preko poziva poznanicima i preko malog oglašavanja.</p>
+    </div>
+
+    <div class="scenariji" id="scenariji"></div>
+    <div class="os"><span>0</span><span>50</span><span>100</span><span>150</span><span>200</span><span>250</span><span>300 pratitelja</span></div>
+
+    <div class="mreza m2" style="margin-top:34px">
+      <div class="papir">
+        <p class="oz">Ciljevi za prosinac (scenarij B)</p>
+        <div class="tablica-omot" style="margin-top:12px">
+          <table>
+            <thead><tr><th>Mjera</th><th>Cilj</th></tr></thead>
+            <tbody>
+              <tr><td>Pratitelji 31. 12.</td><td><b>60–120</b></td></tr>
+              <tr><td>Doseg u mjesecu (jedinstveni ljudi)</td><td><b>1.500–4.000</b></td></tr>
+              <tr><td>Pregledi po reelsu</td><td><b>100–500</b></td></tr>
+              <tr><td>Reakcije, komentari i dijeljenja po objavi</td><td><b>5–20</b></td></tr>
+              <tr><td>Poruke i upiti u Messengeru</td><td><b>3–8</b></td></tr>
+              <tr><td>Prijave na radionice preko Facebooka</td><td><b>1–4</b></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="papir">
+        <p class="oz">Kako čitati brojke</p>
+        <ul class="popis" style="margin-top:14px">
+          <li><span>✦</span><span class="mut"><b>Prosječna Facebook stranica raste oko 0,5–1 % mjesečno</b> (Buffer, Dash Social). Kod 11 pratitelja to je praktički nula, pa se pratitelje treba aktivno skupljati.</span></li>
+          <li><span>✦</span><span class="mut"><b>Reelsi</b> su format koji Facebook najviše pokazuje ljudima koji stranicu još ne prate; slike češće vide postojeći pratitelji. Zato su reelsi glavni izvor novih pratitelja.</span></li>
+          <li><span>✦</span><span class="mut"><b>Od 24. do 27. prosinca</b> aktivnost pada; to je očekivano i zato tada stranica miruje.</span></li>
+          <li><span>✦</span><span class="mut"><b>Više prijava očekujemo u siječnju.</b> Početkom godine ljudi se češće odlučuju na promjene, a radionica 9. siječnja dolazi baš tada. Prosinac služi da do tada stranicu prati dovoljno ljudi.</span></li>
+          <li><span>✦</span><span class="mut"><b>Brojke su procjene.</b> Temelje se na javnim prosjecima i iskustvu s malim stranicama; pravu sliku pokazat će statistika nakon dva tjedna.</span></li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  <span class="rukopis">Vratiti svakome njegovo mjesto</span>
+  AlBa Centar · plan društvenih mreža za prosinac 2026. · pripremio Luminor Solutions
+</footer>
+
+<script>
+/* ======================================================================
+   PODACI: sve objave mjeseca. Kalendar i kartice crtaju se iz ovoga.
+   f: reel | slika | karusel | story | dogadaj
+   s: razumjeti | zastati | pridruziti | iza
+   ====================================================================== */
+const DANI = ["ned", "pon", "uto", "sri", "čet", "pet", "sub"];
+const DANI_PUNO = ["nedjelja", "ponedjeljak", "utorak", "srijeda", "četvrtak", "petak", "subota"];
+const STUP = { razumjeti: "Razumjeti", zastati: "Zastati", pridruziti: "Pridružiti se", iza: "Iza scene" };
+const IME_F = { reel: "Reel", slika: "Slika", karusel: "Karusel", story: "Story", dogadaj: "Događaj" };
+
+const POSEBNI = {
+  1: "Početak plana",
+  5: "Radionica*",
+  6: "2. adventska · Sv. Nikola",
+  13: "3. adventska · Sv. Lucija",
+  19: "Radionica*",
+  20: "4. adventska",
+  21: "Zimski solsticij",
+  24: "Badnjak",
+  25: "Božić",
+  26: "Sv. Stjepan",
+  31: "Stara godina",
+};
+const TAMNI = [6, 13, 20, 24, 25, 26, 31];
+
+const OBJAVE = [
+  { d: 1, t: "08:30", f: "karusel", s: "pridruziti", naslov: "Prosinac u AlBa Centru",
+    cilj: "Najaviti mjesec i prikvačiti objavu na vrh stranice, da je svaki novi posjetitelj vidi prvu.",
+    vizual: "4 slajda u stilu web-stranice: noćno plava podloga, zlatna slova. Prvi slajd: snimka zaslona naslovne scene s astrolabom.",
+    naSlici: "1: Prosinac · 2: Subota, 5. 12. · Radionica obiteljskih konstelacija · 3: Subota, 19. 12. · Naslijeđe predaka · 4: Nedjeljom: adventske svijeće",
+    opis: `Evo što nas čeka u prosincu.
+
+Subota, 5. prosinca: radionica obiteljskih konstelacija.
+Subota, 19. prosinca: radionica Naslijeđe predaka.
+
+Nedjeljom ću ovdje paliti adventske svijeće i uz svaku napisati nekoliko riječi.
+
+Ako vas zanima neka od radionica, javite mi se porukom pa ću vam poslati sve detalje.`,
+    napomena: "Datumi radionica preuzeti su s web-stranice, gdje su označeni kao primjer. Prije objave potvrditi datum, mjesto, cijenu i broj mjesta." },
+
+  { d: 2, t: "20:00", f: "reel", s: "razumjeti", naslov: "Što su obiteljske konstelacije",
+    cilj: "Prvi reel: jednostavno objasniti kako konstelacija izgleda. Ovaj reel je dobar i za prvu promociju.",
+    vizual: "Drvene figure na tamnom stolu, snimano odozgo, krupni plan ruku i figura.",
+    scenarij: [
+      ["0–3 s", "Ruka stavlja prvu figuru na prazan stol.", "Što su zapravo obiteljske konstelacije?"],
+      ["3–9 s", "Ruke dodaju još figura.", "Svaka figura je jedan član obitelji."],
+      ["9–15 s", "Figure se postavljaju na različite udaljenosti.", "Postavimo ih onako kako ih osjećamo."],
+      ["15–23 s", "Prst okreće jednu figuru leđima ostalima.", "I vidimo tko je predaleko. Tko je okrenut leđima."],
+      ["23–28 s", "Svijeća, logotip.", "AlBa Centar · obiteljske konstelacije"],
+    ],
+    opis: `Često me pitaju što se zapravo radi na konstelaciji. Najkraće: članove obitelji postavimo u prostor, figurama ili uz pomoć drugih ljudi, i gledamo kako stoje jedni prema drugima.
+
+Netko je predaleko, netko gleda u stranu, netko stoji na mjestu koje nije njegovo. Kad se to vidi, puno toga postane jasnije.
+
+Ne trebate znati cijelu obiteljsku povijest da biste došli. Dovoljno je pitanje koje vas muči.
+
+Ako vas nešto zanima, pitajte u komentaru.` },
+
+  { d: 3, t: "09:00", f: "karusel", s: "razumjeti", naslov: "Tri Hellingerova načela",
+    cilj: "Objava koju ljudi spremaju i dijele; pokazuje na čemu se temelji rad.",
+    vizual: "Snimke zaslona triju sazviježđa sa stranice /konstelacije (Krug, Red, Vaga), svako na svom slajdu.",
+    naSlici: "1: Tri stvari na kojima Hellinger gradi svoj pristup · 2: Svatko u obitelji ima svoje mjesto · 3: Roditelji su roditelji, djeca su djeca · 4: Davanje i primanje u ravnoteži · 5: Koja vam je najbliža?",
+    opis: `Bert Hellinger je godinama radio s obiteljima i primijetio da se iste stvari stalno ponavljaju. Iz toga su nastala tri načela na kojima se temelji i moj rad.
+
+Prvo: svatko tko pripada obitelji ima pravo na svoje mjesto. I teta koja je otišla u inozemstvo pa se o njoj prestalo pričati.
+
+Drugo: roditelji su roditelji, a djeca su djeca. Kad dijete počne brinuti o roditelju umjesto obrnuto, nešto se poremeti.
+
+Treće: u odnosima odraslih treba postojati ravnoteža između onoga što dajemo i onoga što primamo.
+
+Koje vam je od ova tri najbliže?` },
+
+  { d: 4, t: "09:00", f: "slika", s: "pridruziti", naslov: "Sutra je radionica", dogadaj: true,
+    cilj: "Popuniti zadnja mjesta i smanjiti tremu od prvog dolaska.",
+    vizual: "Stvarna fotografija prostora pripremljenog za radionicu: stolice u krugu, svijeća u sredini, bez ljudi.",
+    naSlici: "Sutra · radionica obiteljskih konstelacija",
+    opis: `Prostor je spreman za sutra.
+
+Na radionicu možete doći s vlastitom temom ili kao predstavnik u tuđoj konstelaciji. Ako ste prvi put, sasvim je u redu samo sjediti, gledati i ništa ne govoriti o sebi.
+
+Imam još nekoliko slobodnih mjesta. Javite mi se porukom ako želite doći.`,
+    napomena: "Facebook događaj za radionicu napraviti najkasnije 1. 12. i u ovu objavu staviti poveznicu na njega." },
+
+  { d: 5, t: "cijeli dan", f: "story", s: "iza", naslov: "Dan radionice",
+    cilj: "Pokazati da se nešto stvarno događa.",
+    vizual: "2–3 storija: svijeća, figure u kutiji, šalica čaja. Bez sudionika.",
+    opis: `Story 1: Danas je radionica.
+Story 2: Još malo pa počinjemo.` },
+
+  { d: 6, t: "18:00", f: "reel", s: "zastati", naslov: "Druga adventska svijeća",
+    cilj: "Početak adventske serije koja se ponavlja svake nedjelje.",
+    vizual: "Adventski vijenac na tamnom stolu, krupni plan, ruke i plamen.",
+    scenarij: [
+      ["0–3 s", "Šibica se pali.", "Druga adventska nedjelja"],
+      ["3–10 s", "Pali se druga svijeća.", "Druga svijeća je svijeća mira."],
+      ["10–18 s", "Dva plamena.", "Mislim na mir u obitelji. Onaj obični,"],
+      ["18–25 s", "Isti kadar, svjetlo titra.", "kad se ne slažemo oko svega, a ipak sjednemo za isti stol."],
+      ["25–30 s", "Šira slika vijenca.", "Lijepu nedjelju vam želim."],
+    ],
+    opis: `Druga adventska nedjelja, a danas je i Sveti Nikola, dan kad djeca na prozoru ostavljaju čizmice.
+
+Palim drugu svijeću. Ovaj tjedan razmišljam o miru u obitelji. Onom stvarnom, u kojem se ne slažemo oko svega, ali se i dalje sjednemo za isti stol.
+
+Lijepu nedjelju vam želim.` },
+
+  { d: 7, t: "08:30", f: "slika", s: "zastati", naslov: "Misao tjedna",
+    cilj: "Tjedna navika: kratka objava koja se lako dijeli.",
+    vizual: "Predložak „Misao tjedna” (noćno plava podloga, zlatna slova) ili fotografija jutarnjeg prozora s tekstom.",
+    naSlici: "Prvi korak ne mora biti velik. Može započeti jednim pitanjem.",
+    opis: `Misao za ovaj tjedan.
+
+Ako vas nešto muči već dulje vrijeme, ne morate odmah tražiti rješenje. Možete početi tako da to pitanje zapišete.` },
+
+  { d: 8, t: "20:00", f: "slika", s: "iza", naslov: "Hvala nakon radionice",
+    cilj: "Zahvala koja pokazuje da se o ljudima brine i nakon susreta.",
+    vizual: "Ruke koje slažu figure natrag u kutiju ili krug praznih stolica nakon radionice.",
+    naSlici: "",
+    opis: `Hvala svima koji ste u subotu bili sa mnom.
+
+Ono što se događa na radionici ostaje među nama. Znam da se poslije često jave nova pitanja, nekad tek za par dana. Ako vam se to dogodi, slobodno mi pišite.`,
+    napomena: "Nikad ne citirati sudionike, ne opisivati njihove teme i ne objavljivati fotografije ljudi." },
+
+  { d: 9, t: "20:00", f: "reel", s: "zastati", naslov: "Tri pitanja za večeras",
+    cilj: "Video koji ljudi spremaju za kasnije; spremanja su Facebooku jak znak da je objava vrijedna.",
+    vizual: "Zimski prozor, para iz šalice čaja, bilježnica. Tekst preko slike.",
+    scenarij: [
+      ["0–3 s", "Prozor, večernje svjetlo.", "Tri pitanja za večeras"],
+      ["3–9 s", "Para iz šalice.", "Što sam u obitelji naučio/la, a nitko me to nije učio?"],
+      ["9–15 s", "Ruka otvara bilježnicu.", "Brinem li se za nekoga više nego što je moje?"],
+      ["15–21 s", "Olovka na papiru.", "Što od toga želim nositi dalje?"],
+      ["21–26 s", "Šalica i svijeća.", "Ne treba odgovoriti odmah."],
+    ],
+    opis: `Tri pitanja za tihu prosinačku večer.
+
+Ne morate imati odgovor odmah. Ako želite, spremite video i vratite mu se kad budete imali mira.` },
+
+  { d: 10, t: "09:00", f: "slika", s: "razumjeti", naslov: "Blog: zašto nisu sve konstelacije iste",
+    cilj: "Dovesti ljude na web-stranicu.",
+    vizual: "Klimtovo „Drvo života” (javno vlasništvo, naslovna slika teksta) s citatom; u dnu sitno: G. Klimt, Drvo života (1909.).",
+    naSlici: "Ne upravljamo poljem, nego dopuštamo da polje vodi nas.",
+    opis: `Danas postoji puno vrsta konstelacija i ljudi se s pravom zbune.
+
+Napisala sam tekst o tome po čemu se rad prema Bertu Hellingeru razlikuje od ostalih i na što obratiti pažnju kad birate kome ćete se obratiti.
+
+Tekst je u prvom komentaru.`,
+    napomena: "Poveznicu staviti u prvi komentar, ne u opis; objave s poveznicom u opisu imaju najmanji doseg." },
+
+  { d: 11, t: "09:00", f: "karusel", s: "razumjeti", naslov: "Prvi put na konstelaciji",
+    cilj: "Odgovoriti na brige zbog kojih ljudi ne dođu prvi put (iz Čestih pitanja na stranici).",
+    vizual: "5 slajdova, krem podloga, zlatna slova.",
+    naSlici: "1: Prvi put na konstelaciji? · 2: Ne morate znati obiteljsku povijest · 3: Ne morate pred drugima pričati o sebi · 4: Možete doći i bez svoje teme · 5: Pitajte me porukom",
+    opis: `Na prvu radionicu ljudi najčešće dođu s istim brigama. Ne znam dovoljno o svojoj obitelji. Neću moći pred drugima pričati o privatnim stvarima. Ne znam ni što bih rekao.
+
+Ništa od toga nije problem. Ako neke podatke ne znate, ne treba ih izmišljati. Koliko ćete podijeliti, odlučujete sami. A možete doći i bez svoje teme i sudjelovati kao predstavnik u tuđoj konstelaciji.
+
+Ako vas brine nešto drugo, pitajte me.` },
+
+  { d: 12, t: "dan", f: "story", s: "zastati", naslov: "Anketa",
+    cilj: "Lagana interakcija u subotu, kad nema objave.",
+    vizual: "Story s anketom na noćno plavoj podlozi.",
+    opis: `Jeste li ikad bili na obiteljskoj konstelaciji?
+Da · Ne · Još ne` },
+
+  { d: 13, t: "18:00", f: "reel", s: "zastati", naslov: "Sveta Lucija",
+    cilj: "Najtopliji reel mjeseca, s našim običajem. Nastavlja se 24. prosinca, kad žito naraste.",
+    vizual: "Zdjelica, pšenica, vrč vode, vijenac s tri svijeće.",
+    scenarij: [
+      ["0–3 s", "Ruke siju pšenicu u zdjelicu.", "Sveta Lucija"],
+      ["3–10 s", "Zalijevanje iz vrča.", "Danas se sije božićno žito."],
+      ["10–17 s", "Pali se treća svijeća.", "I pali treća adventska svijeća."],
+      ["17–25 s", "Tri plamena i zdjelica.", "Do Badnjaka bi trebalo narasti. Javim vam."],
+      ["25–30 s", "Šira slika.", "Lijepu nedjelju!"],
+    ],
+    opis: `Danas je Sveta Lucija pa sam posijala žito, kako se kod nas radi. Ako sve bude kako treba, za Badnjak će biti zeleno i gusto.
+
+Upalila sam i treću adventsku svijeću.
+
+Sijete li i vi žito? Voljela bih vidjeti vaše zdjelice.`,
+    napomena: "Zdjelicu sa žitom fotografirati svaka 2–3 dana; fotografija naraslog žita treba za objavu 24. 12." },
+
+  { d: 14, t: "08:30", f: "slika", s: "zastati", naslov: "Misao tjedna",
+    cilj: "Tjedna navika.",
+    vizual: "Predložak „Misao tjedna”.",
+    naSlici: "Pripadati ne znači odreći se vlastitog puta.",
+    opis: `Misao za ovaj tjedan.
+
+Često nam se čini da moramo birati između obitelji i vlastitog života. Rijetko je stvarno tako.`,
+    napomena: "Danas pregled statistike za prva dva tjedna." },
+
+  { d: 15, t: "09:00", f: "slika", s: "pridruziti", naslov: "Najava: Naslijeđe predaka", dogadaj: true,
+    cilj: "Popuniti radionicu; Facebook događaj šalje podsjetnike zainteresiranima.",
+    vizual: "Van Goghovo „Korijenje stabala” (javno vlasništvo, kao na stranici) s nazivom radionice i datumom.",
+    naSlici: "Naslijeđe predaka · subota, 19. prosinca",
+    opis: `U subotu, 19. prosinca, radimo na temi naslijeđa predaka.
+
+Bavit ćemo se onim što smo od prijašnjih generacija dobili, a da to nismo tražili. Zašto se u nekoj obitelji uvijek štedi „za crne dane”. Zašto se o jednom stricu nikad ne govori. Zašto se neke odluke ponavljaju od bake do unuke.
+
+Imam još dva mjesta za vlastitu temu, a predstavnici su uvijek dobrodošli. Prijave porukom.` },
+
+  { d: 16, t: "20:00", f: "reel", s: "razumjeti", naslov: "Odakle dolaze naši strahovi",
+    cilj: "Objasniti naslijeđene obrasce na primjeru i podržati radionicu 19. 12.",
+    vizual: "Crvena vunena nit i tri figure (najstarija, srednja, najmlađa) na tamnom stolu.",
+    scenarij: [
+      ["0–3 s", "Crvena nit u rukama.", "Odakle dolaze naši strahovi?"],
+      ["3–10 s", "Nit se odmata između tri figure.", "Neki su naši."],
+      ["10–17 s", "Prst pokazuje najstariju figuru.", "A neki su stariji od nas."],
+      ["17–24 s", "Nit se položi na stol.", "Kad shvatimo čiji su, lakše ih je pustiti."],
+      ["24–30 s", "Tri figure i nit.", "Naslijeđe predaka · subota, 19. 12."],
+    ],
+    opis: `Netko se cijeli život boji siromaštva, iako nikad nije bio gladan. Netko ne može spavati kad ukućani kasne, a ne zna zašto. Ponekad trag vodi do bake ili djeda i onoga što su oni prošli.
+
+O tome radimo u subotu na radionici Naslijeđe predaka. Za prijavu mi pošaljite poruku.` },
+
+  { d: 17, t: "09:00", f: "slika", s: "razumjeti", naslov: "Blog: Naslijeđe predaka",
+    cilj: "Tekst koji podupire radionicu i vodi na stranicu.",
+    vizual: "Van Goghovo „Korijenje stabala” s citatom; u dnu sitno: V. van Gogh, Korijenje stabala (1890.).",
+    naSlici: "Naslijeđe postaje izvor, a ne teret.",
+    opis: `Napisala sam tekst o tome kako se neizrečene priče prenose s generacije na generaciju i što s njima možemo napraviti.
+
+Dobar je uvod za subotnju radionicu, a vrijedi ga pročitati i ako ne dolazite. Tekst je u prvom komentaru.` },
+
+  { d: 18, t: "dan", f: "story", s: "pridruziti", naslov: "Podsjetnik za radionicu",
+    cilj: "Zadnji poziv bez nove objave.",
+    vizual: "Story s poveznicom na događaj.",
+    opis: `Sutra je radionica Naslijeđe predaka. Još ima mjesta za predstavnike.` },
+
+  { d: 19, t: "cijeli dan", f: "story", s: "iza", naslov: "Dan radionice",
+    cilj: "Kao 5. prosinca: prostor i svijeća, bez ljudi.",
+    vizual: "Svijeća, crvena nit, figure.",
+    opis: `Danas je radionica Naslijeđe predaka.` },
+
+  { d: 20, t: "18:00", f: "reel", s: "zastati", naslov: "Četvrta adventska svijeća",
+    cilj: "Kraj adventske serije.",
+    vizual: "Vijenac sa sve četiri svijeće.",
+    scenarij: [
+      ["0–3 s", "Šibica.", "Četvrta adventska nedjelja"],
+      ["3–10 s", "Pali se četvrta svijeća.", "Gore sve četiri svijeće."],
+      ["10–18 s", "Četiri plamena.", "Još pet dana do Božića."],
+      ["18–26 s", "Šira slika, toplo svjetlo.", "Nađite u njima i malo vremena za sebe."],
+    ],
+    opis: `Gore sve četiri svijeće.
+
+Ovo je tjedan kupovine, kuhanja i dogovaranja tko će gdje biti za Božić, pa se lako dogodi da sebe stavimo na zadnje mjesto. Ako možete, uzmite si ovaj tjedan barem jednu večer samo za sebe.
+
+Lijepu nedjelju vam želim.` },
+
+  { d: 21, t: "15:45", f: "slika", s: "zastati", naslov: "Najkraći dan u godini",
+    cilj: "Objava vezana uz prirodu i izmjenu dana i noći, motiv cijele web-stranice.",
+    vizual: "Stvarna fotografija zimskog sumraka: golo drvo na brežuljku.",
+    naSlici: "21. prosinca · najkraći dan u godini",
+    opis: `Danas je najkraći dan u godini. Sunce zalazi malo iza četiri, a od sutra je svaki dan malo duži.
+
+Ako vam je ovaj dio godine težak, dobro je znati da od sutra ide prema svjetlu.`,
+    napomena: "Objaviti prije zalaska sunca (u Zagrebu oko 16:10)." },
+
+  { d: 22, t: "09:00", f: "karusel", s: "razumjeti", naslov: "Blagdanski stol",
+    cilj: "Objava s najviše šanse za dijeljenje u mjesecu: konkretna i potrebna baš tih dana.",
+    vizual: "6 slajdova, krem podloga sa zlatnim slovima; prvi slajd fotografija blagdanskog stola.",
+    naSlici: "1: Blagdanski stol: pet stvari koje vrijedi zapamtiti · 2: Ne morate u jednoj večeri riješiti stare svađe · 3: Smijete reći ne, i roditeljima · 4: Ne morate vi držati sve na okupu · 5: Sjetite se onih kojih više nema · 6: Dovoljno je biti tu",
+    opis: `Za mnoge su blagdani najljepši dio godine, a za mnoge najteži. Za isti stol sjednu ljudi koji se cijelu godinu nisu vidjeli, a s njima i sve ono o čemu se u obitelji ne priča.
+
+Napisala sam pet stvari koje mi se čine važne za te dane. Spremite ih ili ih pošaljite nekome kome bi mogle dobro doći.` },
+
+  { d: 23, t: "20:00", f: "reel", s: "zastati", naslov: "Prazno mjesto za stolom",
+    cilj: "Tiha objava za one kojima su blagdani teški. Bez poziva na radionicu.",
+    vizual: "Blagdanski stol s jednom praznom stolicom i svijećom ispred nje.",
+    scenarij: [
+      ["0–3 s", "Stol, jedna prazna stolica.", "Za mnogim stolovima ovih dana netko nedostaje."],
+      ["3–10 s", "Ruka pali svijeću ispred prazne stolice.", "Možete mu ostaviti mjesto."],
+      ["10–18 s", "Plamen.", "Ili upaliti svijeću."],
+      ["18–25 s", "Šira slika stola.", "I dalje je dio obitelji."],
+    ],
+    opis: `Ovaj Božić će mnogima biti prvi bez nekoga. Bez mame, bez supruga, bez prijatelja.
+
+U nekim obiteljima za stolom ostane prazno mjesto ili se upali svijeća. Meni je to lijep običaj: ime se izgovori, osoba se spomene i ne pravimo se da je nije bilo.
+
+Mislim na sve vas kojima su ovi dani teški.`,
+    napomena: "Ovdje nema poziva na radionicu ni poveznice." },
+
+  { d: 24, t: "17:00", f: "slika", s: "zastati", naslov: "Badnjak",
+    cilj: "Čestitka koja zatvara priču sa Svete Lucije.",
+    vizual: "Fotografija naraslog Lucijinog žita uz svijeću.",
+    naSlici: "",
+    opis: `Lucijino žito je naraslo, kako sam i obećala.
+
+Sretan Badnjak i blagoslovljen Božić vam želim. Hvala što ste ove godine bili ovdje.` },
+
+  { d: 28, t: "10:00", f: "slika", s: "zastati", naslov: "Blog: Poštuj svoje pretke, ali biraj vlastiti put",
+    cilj: "Tema kraja godine: što od obitelji nosimo dalje.",
+    vizual: "Friedrichov „Lutalica nad morem magle” (javno vlasništvo, kao na stranici) s citatom; potpis djela sitno.",
+    naSlici: "Poštujem svoje korijene. Ne nosim tuđu sudbinu. Biram vlastiti put.",
+    opis: `Između Božića i Nove godine uvijek se malo osvrnemo na godinu iza nas.
+
+Ovaj tekst je o tome kako poštovati obitelj iz koje dolazimo, a ipak živjeti po svom. Tekst je u prvom komentaru.` },
+
+  { d: 29, t: "20:00", f: "reel", s: "zastati", naslov: "Vježba za kraj godine",
+    cilj: "Reel koji poziva da se nešto napravi, ne samo pogleda.",
+    vizual: "Bilježnica otvorena na dvije stranice, olovka, svijeća.",
+    scenarij: [
+      ["0–3 s", "Otvorena bilježnica.", "Prije nove godine"],
+      ["3–10 s", "Ruka piše naslov lijevo.", "Na lijevu stranu: što nosim dalje."],
+      ["10–17 s", "Ruka piše naslov desno.", "Na desnu: što ostavljam u ovoj godini."],
+      ["17–24 s", "Olovka piše.", "Tri stvari su dovoljne."],
+      ["24–30 s", "Svijeća uz bilježnicu.", "Probajte večeras."],
+    ],
+    opis: `Jednostavna vježba za kraj godine. Uzmite papir i podijelite ga na dvije strane. Lijevo napišite što želite ponijeti u sljedeću godinu, a desno što želite ostaviti u ovoj.
+
+Ne treba puno, tri stvari sa svake strane su dovoljne. Ako želite, napišite mi u komentar jednu stvar koju ostavljate.` },
+
+  { d: 30, t: "10:00", f: "slika", s: "pridruziti", naslov: "Prijave: Majka, izvor života", dogadaj: true,
+    cilj: "Most prema siječnju: prva radionica u novoj godini.",
+    vizual: "Stara slika majke s djetetom u javnom vlasništvu (npr. Mary Cassatt) ili fotografija ruku i figura, s nazivom i datumom.",
+    naSlici: "Majka, izvor života · subota, 9. siječnja",
+    opis: `Prva radionica u novoj godini bit će o majkama.
+
+Odnos s majkom je za mnoge najvažniji i najkompliciraniji odnos u životu. Na radionici gledamo taj odnos, ali i cijelu žensku liniju obitelji: bake, prabake i ono što se među njima prenosilo s koljena na koljeno.
+
+Subota, 9. siječnja. Prijave su otvorene, javite mi se porukom.`,
+    napomena: "Datum s web-stranice je primjer; potvrditi prije objave i napraviti Facebook događaj." },
+
+  { d: 31, t: "11:00", f: "slika", s: "zastati", naslov: "Hvala",
+    cilj: "Kraj godine i zahvala prvim pratiteljima.",
+    vizual: "Predložak s zlatnim tekstom ili zimska fotografija s tekstom.",
+    naSlici: "Hvala vam za 2026.",
+    opis: `Zadnji dan u godini.
+
+Ova stranica je tek na početku, i svaki komentar, poruka i podijeljena objava ovih tjedana puno mi znače. Hvala vam.
+
+Sretna nova godina! Vidimo se u siječnju.` },
+];
+
+/* ======================================================================
+   CRTANJE
+   ====================================================================== */
+const IKONE = {
+  reel: '<svg viewBox="0 0 12 12"><path d="M3 2 L10 6 L3 10Z" fill="currentColor"/></svg>',
+  slika: '<svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="1.5" y="2" width="9" height="8" rx="1"/><path d="M2 9 L5 6 L7 8 L8.5 6.5 L10.5 8.5"/></svg>',
+  karusel: '<svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3.5" y="1.5" width="7" height="7" rx="1"/><path d="M1.5 4 V10.5 H8"/></svg>',
+  story: '<svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="6" cy="6" r="4.5" stroke-dasharray="2 1.4"/></svg>',
+  dogadaj: '<svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="1.5" y="2.5" width="9" height="8" rx="1"/><path d="M1.5 5 H10.5 M4 1 V3.5 M8 1 V3.5"/></svg>',
+};
+const oznakaF = (f) => `<span class="f f-${f}">${IKONE[f]}${IME_F[f]}</span>`;
+const danUTjednu = (d) => new Date(Date.UTC(2026, 11, d)).getUTCDay();
+
+// ikone u tablici formata
+document.querySelectorAll("[data-ikona]").forEach((el) => el.insertAdjacentHTML("afterbegin", IKONE[el.dataset.ikona]));
+
+// kalendar (tjedan počinje ponedjeljkom; 1. 12. 2026. je utorak)
+(function () {
+  const kal = document.getElementById("kal");
+  let html = ["pon", "uto", "sri", "čet", "pet", "sub", "ned"].map((d) => `<div class="kal-dan-ime">${d}</div>`).join("");
+  const pomak = (danUTjednu(1) + 6) % 7;
+  for (let i = 0; i < pomak; i++) html += `<div class="kal prazno"></div>`;
+  for (let d = 1; d <= 31; d++) {
+    const dt = danUTjednu(d);
+    const objave = OBJAVE.filter((o) => o.d === d);
+    const klase = ["kal", dt === 0 || dt === 6 ? "vikend" : "", TAMNI.includes(d) ? "blagdan" : ""].join(" ");
+    html += `<div class="${klase}"><div class="kal-br">${d}.<small>${DANI[dt]}</small></div>`;
+    if (POSEBNI[d]) html += `<div class="kal-oznaka">${POSEBNI[d]}</div>`;
+    for (const o of objave) {
+      const f = o.dogadaj ? [o.f, "dogadaj"] : [o.f];
+      html += `<a class="stavka" href="#objava-${d}" data-f="${f.join(" ")}"><span class="stavka-red">${oznakaF(o.f)}<span class="stavka-vrijeme">${o.t}</span></span><span class="stavka-naslov">${o.naslov}</span>${o.dogadaj ? `<span>${oznakaF("dogadaj")}</span>` : ""}</a>`;
+    }
+    if (d >= 25 && d <= 27) html += `<span class="stavka-vrijeme" style="font-weight:500">stranica miruje</span>`;
+    html += `</div>`;
+  }
+  const kraj = (7 - ((pomak + 31) % 7)) % 7;
+  for (let i = 0; i < kraj; i++) html += `<div class="kal prazno"></div>`;
+  kal.innerHTML = html;
+  document.getElementById("legenda").innerHTML =
+    ["reel", "slika", "karusel", "story", "dogadaj"].map(oznakaF).join("") +
+    `<span>* datumi radionica su zasad primjeri s web-stranice i treba ih potvrditi</span>`;
+
+  document.querySelectorAll(".filteri button").forEach((b) =>
+    b.addEventListener("click", () => {
+      document.querySelectorAll(".filteri button").forEach((x) => x.setAttribute("aria-pressed", String(x === b)));
+      const f = b.dataset.filter;
+      document.querySelectorAll(".kal a.stavka").forEach((a) => a.classList.toggle("skriveno", f !== "sve" && !a.dataset.f.split(" ").includes(f)));
+    }),
+  );
+})();
+
+// kartice objava po tjednima
+(function () {
+  const TJEDNI = [
+    { od: 1, do: 6, naslov: "1.–6. prosinca", opis: "Upoznavanje: što su konstelacije, tri načela, prva radionica i prva adventska svijeća na stranici." },
+    { od: 7, do: 13, naslov: "7.–13. prosinca", opis: "Povjerenje: zahvala nakon radionice, česta pitanja, blog i sveta Lucija." },
+    { od: 14, do: 20, naslov: "14.–20. prosinca", opis: "Naslijeđe: najava i reel za drugu radionicu, blog, četvrta svijeća." },
+    { od: 21, do: 27, naslov: "21.–27. prosinca", opis: "Blagdani i obitelj: solsticij, blagdanski stol, prazna stolica, Badnjak. Od 25. do 27. stranica miruje." },
+    { od: 28, do: 31, naslov: "28.–31. prosinca", opis: "Kraj godine: osvrt, siječanjska radionica i zahvala." },
+  ];
+  const esc = (s) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;");
+  let html = "";
+  for (const tj of TJEDNI) {
+    html += `<div class="tjedan"><div class="tjedan-glava"><h3>${tj.naslov}</h3><p>${tj.opis}</p></div><div class="objave">`;
+    for (const o of OBJAVE.filter((x) => x.d >= tj.od && x.d <= tj.do)) {
+      const dt = danUTjednu(o.d);
+      html += `<article class="papir objava" id="objava-${o.d}">
+        <div class="objava-datum"><span class="dan">${o.d}.<small> 12.</small></span><span class="tj">${DANI_PUNO[dt]}</span><span class="vr">${o.t}</span></div>
+        <div>
+          <h4>${o.naslov}</h4>
+          <div class="objava-meta">${oznakaF(o.f)}${o.dogadaj ? oznakaF("dogadaj") : ""}<span class="stup-oznaka">${STUP[o.s]}</span></div>
+          <dl class="polja">
+            <dt>Cilj</dt><dd>${o.cilj}</dd>
+            <dt>Vizual</dt><dd>${o.vizual}</dd>
+            ${o.naSlici ? `<dt>Tekst na slici</dt><dd><em>${o.naSlici}</em></dd>` : ""}
+          </dl>
+          ${o.scenarij ? `<div class="scenarij"><table><thead><tr><th>Vrijeme</th><th>Kadar</th><th>Tekst na ekranu</th></tr></thead><tbody>${o.scenarij.map(([a, b, c]) => `<tr><td>${a}</td><td>${b}</td><td>${c}</td></tr>`).join("")}</tbody></table></div>` : ""}
+          <div class="opis"><div class="opis-oznaka"><span>${o.f === "story" ? "Tekst storija" : "Opis objave"}</span><button class="kopiraj" type="button">Kopiraj</button></div><span class="opis-tekst">${esc(o.opis)}</span></div>
+          ${o.napomena ? `<p class="napomena">${o.napomena}</p>` : ""}
+        </div>
+      </article>`;
+    }
+    html += `</div></div>`;
+  }
+  document.getElementById("tjedni").innerHTML = html;
+  document.querySelectorAll(".kopiraj").forEach((b) =>
+    b.addEventListener("click", async () => {
+      const tekst = b.closest(".opis").querySelector(".opis-tekst").textContent;
+      try { await navigator.clipboard.writeText(tekst); } catch { const t = document.createElement("textarea"); t.value = tekst; document.body.appendChild(t); t.select(); document.execCommand("copy"); t.remove(); }
+      b.textContent = "Kopirano"; b.dataset.gotovo = "1";
+      setTimeout(() => { b.textContent = "Kopiraj"; delete b.dataset.gotovo; }, 1800);
+    }),
+  );
+})();
+
+// scenariji rasta
+(function () {
+  const MAKS = 300;
+  const S = [
+    { ime: "Bez promjene", pod: "dosadašnji ritam", opis: "Povremene objave kao do sada. Facebook stranici koja se rijetko javlja daje vrlo malo dosega.", od: 11, do: 15 },
+    { ime: "A · Samo plan", pod: "24 objave", opis: "Plan proveden u cijelosti, ali bez pozivanja ljudi i bez oglasa. Novi pratitelji dolaze uglavnom preko reelsa.", od: 25, do: 40 },
+    { ime: "B · Plan i pozivi", pod: "preporuka", opis: "Plan, uz pozivanje prijatelja s osobnih profila, pozive svima koji reagiraju i dijeljenje u 3–5 grupa.", od: 60, do: 120, istaknut: true },
+    { ime: "C · B i mali oglasi", pod: "65–80 € u prosincu", opis: "Sve iz B, plus promocija dvaju događaja i najboljeg reela mjeseca.", od: 150, do: 300 },
+  ];
+  document.getElementById("scenariji").innerHTML = S.map((s) => `
+    <div class="scen${s.istaknut ? " istaknut" : ""}">
+      <h3>${s.ime}<small>${s.pod}</small></h3>
+      <p>${s.opis}</p>
+      <div class="scen-broj">${s.od}–${s.do}<small>pratitelja 31. 12.</small></div>
+      <div class="scen-traka"><i style="left:${(s.od / MAKS) * 100}%;width:${((s.do - s.od) / MAKS) * 100}%"></i><b style="left:${(11 / MAKS) * 100}%" title="danas: 11"></b></div>
+    </div>`).join("");
+})();
+
+// zvjezdano nebo u glavi (crta se jednom)
+(function () {
+  const c = document.getElementById("nebo"); const x = c.getContext("2d");
+  const crtaj = () => {
+    const r = c.getBoundingClientRect(), dpr = Math.min(devicePixelRatio || 1, 2);
+    c.width = r.width * dpr; c.height = r.height * dpr; x.setTransform(dpr, 0, 0, dpr, 0, 0);
+    let s = 7; const rnd = () => ((s = (s * 16807) % 2147483647) / 2147483647);
+    const n = Math.round((r.width * r.height) / 4200);
+    for (let i = 0; i < n; i++) {
+      const px = rnd() * r.width, py = rnd() * r.height * 0.9, v = Math.pow(rnd(), 3) * 1.6 + 0.3, a = rnd() * 0.6 + 0.25;
+      const boja = rnd() < 0.25 ? "226,196,135" : rnd() < 0.3 ? "198,214,255" : "246,234,210";
+      if (v > 1.2) { x.fillStyle = `rgba(${boja},${a * 0.14})`; x.beginPath(); x.arc(px, py, v * 3.4, 0, 7); x.fill(); }
+      x.fillStyle = `rgba(${boja},${a})`; x.beginPath(); x.arc(px, py, v, 0, 7); x.fill();
+      if (v > 1.55) { x.strokeStyle = `rgba(${boja},${a * 0.6})`; x.lineWidth = 0.7; const k = v * 6; x.beginPath(); x.moveTo(px - k, py); x.lineTo(px + k, py); x.moveTo(px, py - k); x.lineTo(px, py + k); x.stroke(); }
+    }
+  };
+  crtaj(); addEventListener("resize", crtaj);
+  // podjela na rubu astrolaba i zvijezde obitelji
+  const g = document.getElementById("podjela"); let h = "";
+  for (let k = 0; k < 144; k++) { const kut = (k * 2.5 - 90) * Math.PI / 180, vr = k % 12 === 0 ? 2 : k % 4 === 0 ? 1 : 0, r1 = [247, 242, 236][vr];
+    h += `<line x1="${(280 + r1 * Math.cos(kut)).toFixed(1)}" y1="${(280 + r1 * Math.sin(kut)).toFixed(1)}" x2="${(280 + 253 * Math.cos(kut)).toFixed(1)}" y2="${(280 + 253 * Math.sin(kut)).toFixed(1)}" stroke-width="${vr === 2 ? 1.1 : 0.7}" opacity="${[0.35, 0.6, 0.9][vr]}"/>`; }
+  g.innerHTML = h;
+  const Z = [[166,120,2.4],[318,92,2.6],[150,214,3.6],[330,186,3.8],[418,222,3.2],[204,292,4.6],[362,282,4.8],[286,372,7],[232,446,3.4],[338,452,3]];
+  document.getElementById("zvijezde-astrolaba").innerHTML = Z.map(([a, b, v]) => `<circle cx="${a}" cy="${b}" r="${v * 2.6}" fill="#f3d391" opacity=".12"/><path d="M${a} ${b - v * 2.2} L${a + v * 0.25} ${b} L${a} ${b + v * 2.2} L${a - v * 0.25} ${b}Z M${a - v * 2.2} ${b} L${a} ${b + v * 0.25} L${a + v * 2.2} ${b} L${a} ${b - v * 0.25}Z"/><circle cx="${a}" cy="${b}" r="${v * 0.4}"/>`).join("");
+})();
+</script>
+</body>
+</html>
